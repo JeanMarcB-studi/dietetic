@@ -15,22 +15,21 @@ font-family: 'Ruthie', cursive;
 /* BOOTSTRAP ICONS */
 @import url("https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css");
 
-:root {
-  
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:root {  
   --colorCoffee: #573D1C;
   --colorApricot: #FFC6AC;
   --colorPear: #C1DF1F; 
   --colorJade: #00A878;
 
-  --font0: 'Ruthie', cursive;
+  --font0: 'Qwitcher Grypen', cursive;
   --font1: 'Playfair Display', serif; 
   --font2: 'Montserrat', sans-serif;
-}
-
-*{
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
 }
 
 .myApricotBG{
@@ -52,15 +51,16 @@ font-family: 'Ruthie', cursive;
   color: var(--colorJade);
 }
 
-.title{
+.myTitle{
   color: var(--colorApricot);
+  font-family:var(--font0);
 }
 h1{
-  color: var(--colorCoffee);
+  color: var(--colorJade);
   font-family:var(--font1);
 }
 h2{
-  color: var(--colorJade);
+  color: var(--colorCoffee);
   font-family:var(--font2);
 }
 
@@ -68,17 +68,29 @@ h2{
   width: 100%;
   height: auto;
 }
+
+.myHeader{
+  /* height: 100%; */
+  height: 4em;
+  background-color: var(--colorApricot);
+  box-shadow: 0 10px 10px rgba(0, 0, 0, 0.7) ;
+}
+
+.roundApricot{
+  display: block;
+  /* height: 100px; */
+  height: 100%;
+  border-top-left-radius: 150px;
+  border-top-right-radius: 150px;
+  background-color: var(--colorApricot);
+}
+
 /*
 .arab1{
   width: 45vw;
   max-width: 140px;
 }
 
-.myHeader{
-  height: 100%;
-  background-color: var(--color0);
-  box-shadow: 0 10px 10px rgba(0, 0, 0, 0.7) ;
-}
 
 .myActive, .myActive:visited, .myActive:hover, .myActive:active {
   color: var(--color1);

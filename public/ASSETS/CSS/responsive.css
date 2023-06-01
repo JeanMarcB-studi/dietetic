@@ -1,6 +1,7 @@
-/* R E S P O N S I V I T Y --------------------------------------------------------------*/
 
-/* RESPONSIVITY : WIDTH VALUES INFERIOR 350px LARGE */
+/* R E S P O N S I V I T Y -------------------------------------------------------------- */
+/*                                      RESPONSIVITY : WIDTH VALUES INFERIOR 350px LARGE */
+
 .myLogo{
   background-image: url("../IMG/logoW.png");
   background-size: 100%;
@@ -13,16 +14,37 @@
 
 .myTitle{ 
   font-family: var(--font0);
-  font-size: 32px;
+  font-weight: bolder;
   word-wrap: break-word;
   white-space: normal;
-  color:rgba(255, 255, 255,1);
-  text-shadow: -4px -3px 6px rgba(137, 137, 135, 0.7);
+  text-shadow: 2px 3px 4px rgba(137, 137, 135, 0.3);
   border-width: 0;
-  line-height: 26px;
+  color: var(--colorCoffee);
+  text-decoration: none;
   /* top:140px; */
   /* position:absolute; */
+  line-height: 42px;
+  font-size: 40px;
 }
+
+.bigTitle{ 
+  font-family: var(--font0);
+  /* width: 100%; */
+  /* font-size: 120px; */
+  font-weight: bolder;
+  word-wrap: break-word;
+  white-space: normal;
+  text-shadow: 2px 3px 4px rgba(137, 137, 135, 0.4);
+  border-width: 0;
+  color: var(--colorCoffee);
+  text-decoration: none;
+  /* top:140px; */
+  /* position:absolute; */
+  font-size: 16vw;
+  line-height: 20vw;
+  vertical-align: bottom;
+}
+
 .myWidth{
   /* max-width: 95%; */
   /* padding: auto; */
@@ -33,17 +55,22 @@
   max-width: 500px;
 }
 
-/* RESPONSIVITY : WIDTH VALUES from 576px to 992px LARGE */
+/* R E S P O N S I V I T Y -------------------------------------------------------------- */
+/*                                 RESPONSIVITY : WIDTH VALUES from 576px to 992px LARGE */
 @media (min-width: 576px){
   .myLogo{
     height: 5em;
     width: 6em;
   }  
   .myTitle{
-    font-size: 30px;
+    /* font-size: 30px; */
     word-wrap: normal;
     white-space: nowrap;
     line-height: 16px;
+  }
+  .bigTitle{ 
+    font-size: 12vw;
+    line-height: 16vw;
   }
   .myWidth{
     max-width: 95%;
@@ -55,7 +82,8 @@
   }
 }
 
-/* RESPONSIVITY : WIDTH VALUES MORE THAN 992px LARGE = 'LG'*/
+/* R E S P O N S I V I T Y -------------------------------------------------------------- */
+/*                               RESPONSIVITY : WIDTH VALUES MORE THAN 992px LARGE = 'LG'*/
 @media (min-width: 992px){
   .myLogo{
     height: 6em;
@@ -67,6 +95,10 @@
   }
   .myWidth{
     max-width: 650px;
+  }
+  .bigTitle{ 
+    font-size: 120px;
+    line-height: 200px;
   }
   .myWidthSmall{
     max-width: 500px;

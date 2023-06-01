@@ -27,6 +27,16 @@
         {% endblock %}
     </head>
     <body>
+
+        <header class="container-fluid ">
+        <div class="row">
+            <div class="col d-block myHeader">
+            {% include "includes/_nav.html.twig" %}
+            </div>
+        </div>
+        </header>
+
+
         {% block body %}{% endblock %}
     </body>
 </html>
