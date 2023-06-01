@@ -1,0 +1,74 @@
+/* R E S P O N S I V I T Y --------------------------------------------------------------*/
+
+/* RESPONSIVITY : WIDTH VALUES INFERIOR 350px LARGE */
+.myLogo{
+  background-image: url("../IMG/logoW.png");
+  background-size: 100%;
+  background-repeat: no-repeat;
+  height: 70px;
+  width: 80px;
+  /* border: 2px solid orange; */
+  /* box-shadow: 0 0 5px rgba(255, 255, 255,0.92); */
+}
+
+.myTitle{ 
+  font-family: var(--font0);
+  font-size: 32px;
+  word-wrap: break-word;
+  white-space: normal;
+  color:rgba(255, 255, 255,1);
+  text-shadow: -4px -3px 6px rgba(137, 137, 135, 0.7);
+  border-width: 0;
+  line-height: 26px;
+  /* top:140px; */
+  /* position:absolute; */
+}
+.myWidth{
+  /* max-width: 95%; */
+  /* padding: auto; */
+  margin: 0;
+}
+.myWidthSmall{
+  max-width: 95%;
+  max-width: 500px;
+}
+
+/* RESPONSIVITY : WIDTH VALUES from 576px to 992px LARGE */
+@media (min-width: 576px){
+  .myLogo{
+    height: 5em;
+    width: 6em;
+  }  
+  .myTitle{
+    font-size: 30px;
+    word-wrap: normal;
+    white-space: nowrap;
+    line-height: 16px;
+  }
+  .myWidth{
+    max-width: 95%;
+    max-width: 600px;
+  }
+  .myWidthSmall{
+    max-width: 95%;
+    max-width: 500px;
+  }
+}
+
+/* RESPONSIVITY : WIDTH VALUES MORE THAN 992px LARGE = 'LG'*/
+@media (min-width: 992px){
+  .myLogo{
+    height: 6em;
+    width: 7em;
+  } 
+  .myTitle{
+    font-size: 42px;
+    line-height: 34px;
+  }
+  .myWidth{
+    max-width: 650px;
+  }
+  .myWidthSmall{
+    max-width: 500px;
+  }
+}
