@@ -24,19 +24,30 @@
 
             {# include bootstrap JVS #}
             <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous"></script>
+
+
         {% endblock %}
     </head>
     <body>
 
-        <header class="container-fluid ">
-        <div class="row">
-            <div class="col d-block myHeader">
+        {#         -----        N A V B A R        -----             #}
+        <header class="container-fluid myHead sticky-top">
+        
+        {# <div class="row border mb-3 border">
+        
+        </div> #}
+        
+        <div class="row ">
+            <div class="col d-block myHeader  mt-0">
             {% include "includes/_nav.html.twig" %}
             </div>
         </div>
         </header>
 
-
         {% block body %}{% endblock %}
+        
+        {# include my scripts #}
+        <script src="{{ asset('ASSETS/JVS/script.js') }}"></script>
+
     </body>
 </html>

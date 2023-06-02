@@ -73,7 +73,6 @@
     line-height: 16vw;
   }
   .myWidth{
-    max-width: 95%;
     max-width: 600px;
   }
   .myWidthSmall{
@@ -94,7 +93,7 @@
     line-height: 34px;
   }
   .myWidth{
-    max-width: 650px;
+    max-width: 850px;
   }
   .bigTitle{ 
     font-size: 120px;
