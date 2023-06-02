@@ -1,20 +1,113 @@
 {% extends 'base_pages.html.twig' %}
 
-{% block title %}Hello PagesController!{% endblock %}
+{% block title %}Bienvenue chez Sandrine{% endblock %}
 
 {% block body %}
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-</style>
 
-<div class="example-wrapper">
-    <h1>Hello {{ controller_name }}! ✅</h1>
+<article class="container-fluid ">
+    <div class="row">
+        <div class="col-12 bigTitle text-center">
+            Sandrine Coupart
+        </div>
 
-    This friendly message is coming from:
-    <ul>
-        <li>Your controller at <code><a href="{{ 'C:/xampp/htdocs/PHP/symfo_diete/src/Controller/PagesController.php'|file_link(0) }}">src/Controller/PagesController.php</a></code></li>
-        <li>Your template at <code><a href="{{ 'C:/xampp/htdocs/PHP/symfo_diete/templates/pages/index.html.twig'|file_link(0) }}">templates/pages/index.html.twig</a></code></li>
-    </ul>
+        <h1 class="col-12 text-center">
+            DIETETICIENNE-NUTRITIONNISTE
+        </h1>
+    
+        <h2 class="h2 text-center">
+            Venez vous sentir mieux
+        </h2>
+    </div>    
+
+    <div class="row roundApricot myWidth py-5 mx-auto ">
+        <div class="col-12">
+        
+            <div class="container ">
+                <div class="row">
+
+                    {# PHOTO #}
+                    <div class="col-12 col-lg-6 ">
+                        <div class="myStickers myApricotBG rounded-pill">
+                        <div class="mx-auto max-300">
+                            <img src="{{ asset('ASSETS/IMG/img16c.jpg') }}" class="myImages rounded-pill  " alt="photo de Sandrine Coupart" srcset="">
+                        </div>
+                        </div>
+                    </div>
+
+                    <div class="col-12 col-lg-6 myJade mt-3">
+                        <h2>
+                            Bienvenue,
+                        </h2>
+                        <div class ="h4 ">
+                            Je suis Sandrine Coupart diététicienne diplômée, spécialisée en nutrition, régimes et conseils de santé. En tant que professionelle de santé, je prends en charge des patients dans le cadre de consultations diététiques.<br>                            
+                        </div>
+                    </div>
+
+
+                    <div class="col-12 col-sm-6 mt-4 myJade ">
+                        <div class="bg-light border rounded p-2 h-100">
+                            <h2>
+                                A propos de moi...
+                            </h2>
+                            <div class =" h-100">
+                            Diétécienne-nutritionniste libérale, et membre de l'AFDN (Asscociation Française des Diététiciens Nutritionnistes), j'exerce à Caen depuis Juillet 2010 où je vous reçois tous les jours sur rendez-vous.
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-12 col-sm-6 mt-4 myJade ">
+                        <div class="bg-light border rounded p-2 h-100">
+                            <h2>
+                                Mes services                            
+                            </h2>
+                            <div class =" ">
+                            En tant que diététicienne nutritionniste, je vous propose un soin diététique adapté à votre état de santé, à vos goûts, à vos routines, et à vos possibilités de suivre les conseils.<br> 
+                            J'anime également des ateliers de prévention et d'information sur la nutrition.
+                            </div>
+                        </div>
+                    </div>
+                
+                </div>
+            </div>
+
+
+        </div>
+    </div> {# end row #}
+
+   
+
+
+    <div class="block-100 myApricotBG myWidth mx-auto"></div>
+    <div class="row roundJade myWidth mx-auto positUp py-3" >
+
+        <h2 class="myApricot text-center px-3 pt-4 pb-1">
+            Des recettes sur mesure
+        </h2>
+
+        <div class="col-12 text-white px-5 pb-3 mb-5 ">
+            Une fois mon diagnostic diététique établi, je peux vous offrir un suivi personnalisé.<br> Notamment, par l'intermédiaire de diverses recettes qui vous seront proposées. Ces recettes prendront en compte les régimes prescrits et naturellement toutes sortes d'allergies que vous pourriez avoir.
+        </div>
+
+        <div class="text-center">
+        <a class="btonContact m-auto">
+            ME CONTACTER
+        </a>
+        </div>
+    
+    </div>
+    
+    
+    {# </div>
+    </div> #}
+
+
+</article>
+
+
+<div class="block-100"></div>
+
+
+<div class=" container">
 </div>
+
 {% endblock %}

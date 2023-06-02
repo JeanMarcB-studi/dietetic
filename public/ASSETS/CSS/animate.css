@@ -1,0 +1,18 @@
+.myInnerImg {
+  transition: 0.3s;
+}
+.myInnerImg:hover {
+  transform: scale(1.25);
+}
+
+.myMenu{
+  background: linear-gradient(to top, white 0%, var(--color1) 1px, transparent 1px) no-repeat;
+  background-size: 0 100%;
+  transition: background-size ease-in-out .3s;
+  padding-bottom: 0%;
+  color:white;
+}
+.myMenu:hover{
+  background-size: 98% 100%;
+  color: white;
+}
