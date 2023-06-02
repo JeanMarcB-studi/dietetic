@@ -1,0 +1,68 @@
+[33mcommit 9c59b36ad7f23f2b264dcd4a41680b42030c69ca[m[33m ([m[1;36mHEAD -> [m[1;32mprod[m[33m, [m[1;31morigin/prod[m[33m)[m
+Merge: 19ea2fa cc8562c
+Author: Jean-Marc BOUTAUD <jmbstudi@gmail.com>
+Date:   Fri Jun 2 19:31:31 2023 +0200
+
+    Merge branch 'dev' into prod
+
+[33mcommit cc8562cb083fde14675b0fcd05515909109585ec[m[33m ([m[1;32mdev[m[33m)[m
+Author: Jean-Marc BOUTAUD <jmbstudi@gmail.com>
+Date:   Fri Jun 2 19:31:26 2023 +0200
+
+    Added .htAccess on root & public.
+
+[33mcommit 19ea2fa87a94238f8464a6def026546396df8e0d[m
+Merge: a07a8e3 7c25fbd
+Author: Jean-Marc BOUTAUD <jmbstudi@gmail.com>
+Date:   Fri Jun 2 19:12:54 2023 +0200
+
+    Merge branch 'dev' into prod
+
+[33mcommit 7c25fbdc36579b74cb54042bf114cba1f6b6833e[m[33m ([m[1;31morigin/dev[m[33m)[m
+Author: Jean-Marc BOUTAUD <jmbstudi@gmail.com>
+Date:   Fri Jun 2 19:12:31 2023 +0200
+
+    Home page main design done and responsive.
+
+[33mcommit 7965f67c008af047a2f2835738f7452128387d43[m
+Author: Jean-Marc BOUTAUD <jmbstudi@gmail.com>
+Date:   Thu Jun 1 20:14:41 2023 +0200
+
+    Nav bar done, Home Page in progress.
+
+[33mcommit f6daa30cda3f89ad18b5ba554b5b5741b2450391[m
+Author: Jean-Marc BOUTAUD <jmbstudi@gmail.com>
+Date:   Thu Jun 1 15:40:36 2023 +0200
+
+    Colors & Font setup in CSS file.
+
+[33mcommit a07a8e35559f4c1e2df68494b4f457874705b7eb[m
+Merge: daf429c dd1b71f
+Author: Jean-Marc BOUTAUD <jmbstudi@gmail.com>
+Date:   Thu Jun 1 14:29:49 2023 +0200
+
+    Merge branch 'dev' into prod
+
+[33mcommit dd1b71fe21f37c5d346582e615b68e3119fba7e0[m
+Author: Jean-Marc BOUTAUD <jmbstudi@gmail.com>
+Date:   Thu Jun 1 14:27:59 2023 +0200
+
+    Index page has been initialized, ASSETS dir initialized.
+
+[33mcommit daf429c2a2034360a7f4a641b9466fd925649d44[m
+Author: Jean-Marc BOUTAUD <jmbstudi@gmail.com>
+Date:   Tue May 30 20:34:55 2023 +0200
+
+    Initiliaze.
+
+[33mcommit 5acacce426685a2f2ce5c946cdd2707e9d2904ec[m
+Author: Jean-Marc BOUTAUD <jmbstudi@gmail.com>
+Date:   Tue May 30 18:12:19 2023 +0200
+
+    Add webapp packages
+
+[33mcommit bee8d048e944f14f5a8f47227f6af9f0ec7b17f0[m
+Author: Jean-Marc BOUTAUD <jmbstudi@gmail.com>
+Date:   Tue May 30 18:11:46 2023 +0200
+
+    Add initial set of files
