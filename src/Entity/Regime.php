@@ -48,4 +48,10 @@ class Regime
 
         return $this;
     }
+
+    // "magical" function
+    public function __toString()
+    {
+        return $this->getTitre();
+    }
 }

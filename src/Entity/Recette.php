@@ -40,10 +40,10 @@ class Recette
     #[ORM\Column]
     private ?bool $visible_tous = null;
 
-    #[ORM\ManyToMany(targetEntity: regime::class)]
+    #[ORM\ManyToMany(targetEntity: Regime::class)]
     private Collection $regime;
 
-    #[ORM\ManyToMany(targetEntity: allergene::class)]
+    #[ORM\ManyToMany(targetEntity: Allergene::class)]
     private Collection $allergene;
 
     #[ORM\OneToMany(mappedBy: 'recette', targetEntity: Note::class, orphanRemoval: true)]

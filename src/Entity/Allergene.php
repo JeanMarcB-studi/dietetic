@@ -32,4 +32,11 @@ class Allergene
 
         return $this;
     }
+
+    // "magical" function
+    public function __toString()
+    {
+        return $this->getNom();
+    }
+    
 }
