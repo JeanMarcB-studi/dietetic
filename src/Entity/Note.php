@@ -23,6 +23,14 @@ class Note
     #[ORM\Column(type: Types::DATETIME_MUTABLE)]
     private ?\DateTimeInterface $date_avis = null;
 
+    #[ORM\ManyToOne(inversedBy: 'notes')]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?recette $recette = null;
+
+    #[ORM\ManyToOne(inversedBy: 'notes')]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?user $user = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -60,6 +68,30 @@ class Note
     public function setDateAvis(\DateTimeInterface $date_avis): self
     {
         $this->date_avis = $date_avis;
+
+        return $this;
+    }
+
+    public function getRecette(): ?recette
+    {
+        return $this->recette;
+    }
+
+    public function setRecette(?recette $recette): self
+    {
+        $this->recette = $recette;
+
+        return $this;
+    }
+
+    public function getUser(): ?user
+    {
+        return $this->user;
+    }
+
+    public function setUser(?user $user): self
+    {
+        $this->user = $user;
 
         return $this;
     }
