@@ -54,6 +54,9 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\ManyToMany(targetEntity: Allergene::class)]
     private Collection $allergene;
 
+    #[ORM\Column]
+    private ?bool $est_client = null;
+
     public function __construct()
     {
         // $this->notes = new ArrayCollection();
@@ -284,6 +287,18 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function removeAllergene(Allergene $allergene): self
     {
         $this->allergene->removeElement($allergene);
+
+        return $this;
+    }
+
+    public function isEstClient(): ?bool
+    {
+        return $this->est_client;
+    }
+
+    public function setEstClient(bool $est_client): self
+    {
+        $this->est_client = $est_client;
 
         return $this;
     }
