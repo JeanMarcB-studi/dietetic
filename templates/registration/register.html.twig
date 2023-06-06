@@ -1,0 +1,53 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Inscription{% endblock %}
+
+{% block body %}
+
+<h1 class="text-center my-2">
+    INSCRIPTION
+</h1>
+
+<div class="p-2">
+    <article class="container-sm mx-auto myWidth max-500 ">
+        <div class="row border rounded-2 myApricotBG p-1 p-sm-4">
+            {# <div class="col-12 mt-3 border">
+                <h2>Vous enregistrer :</h2>
+            </div> #}
+
+            <div class="col-12 mt-3 p-1">
+                {{ form_start(registrationForm) }}
+                    {{ form_row(registrationForm.email) }}
+                    {{ form_row(registrationForm.plainPassword, {
+                        label: 'Mot de passe'
+                    }) }}
+                    <br>
+                    {{ form_row(registrationForm.prenom) }}
+                    {{ form_row(registrationForm.nom) }}
+                    {{ form_row(registrationForm.telephone) }}
+                    <br>
+                    {{ form_row(registrationForm.commentaire_user) }}
+
+                    {# {{ form_row(registrationForm.agreeTerms) }} #}
+
+                    <button type="submit" class="btn btn-outline-info btn-lg my-4">s'enregistrer</button>
+                {{ form_end(registrationForm) }}
+
+            </div>
+        </div>
+{# <div class="container-sm myWidth mx-auto"> #}
+    <div class="row px-2">
+        <div class="col-12">
+            <a class="nav-link px-2 pb-2 mx-lg-2" id="carte" href="{{ path('app_login') }}">
+            Déjà enregistré ?<br> 
+            <span class="text-info">Connectez-vous</span>
+            </a>
+        </div>
+    </div>
+{# </div> #}
+    </article>
+</div>
+
+
+
+{% endblock %}

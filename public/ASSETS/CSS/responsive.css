@@ -75,11 +75,7 @@
   .myWidth{
     max-width: 600px;
   }
-  .myWidthSmall{
-    max-width: 95%;
-    max-width: 500px;
-  }
-}
+
 
 /* R E S P O N S I V I T Y -------------------------------------------------------------- */
 /*                               RESPONSIVITY : WIDTH VALUES MORE THAN 992px LARGE = 'LG'*/
@@ -99,7 +95,5 @@
     font-size: 120px;
     line-height: 200px;
   }
-  .myWidthSmall{
-    max-width: 500px;
-  }
+
 }
