@@ -45,18 +45,18 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(length: 50)]
     private ?string $telephone = null;
 
-    #[ORM\OneToMany(mappedBy: 'user', targetEntity: Note::class, orphanRemoval: true)]
-    private Collection $notes;
+    // #[ORM\OneToMany(mappedBy: 'user', targetEntity: Note::class, orphanRemoval: true)]
+    // private Collection $notes;
 
-    #[ORM\ManyToMany(targetEntity: regime::class)]
+    #[ORM\ManyToMany(targetEntity: Regime::class)]
     private Collection $regime;
 
-    #[ORM\ManyToMany(targetEntity: allergene::class)]
+    #[ORM\ManyToMany(targetEntity: Allergene::class)]
     private Collection $allergene;
 
     public function __construct()
     {
-        $this->notes = new ArrayCollection();
+        // $this->notes = new ArrayCollection();
         $this->regime = new ArrayCollection();
         $this->allergene = new ArrayCollection();
     }
@@ -210,35 +210,35 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
-    /**
-     * @return Collection<int, Note>
-     */
-    public function getNotes(): Collection
-    {
-        return $this->notes;
-    }
+    // /**
+    //  * @return Collection<int, Note>
+    //  */
+    // public function getNotes(): Collection
+    // {
+    //     return $this->notes;
+    // }
 
-    public function addNote(Note $note): self
-    {
-        if (!$this->notes->contains($note)) {
-            $this->notes->add($note);
-            $note->setUser($this);
-        }
+    // public function addNote(Note $note): self
+    // {
+    //     if (!$this->notes->contains($note)) {
+    //         $this->notes->add($note);
+    //         $note->setUser($this);
+    //     }
 
-        return $this;
-    }
+    //     return $this;
+    // }
 
-    public function removeNote(Note $note): self
-    {
-        if ($this->notes->removeElement($note)) {
-            // set the owning side to null (unless already changed)
-            if ($note->getUser() === $this) {
-                $note->setUser(null);
-            }
-        }
+    // public function removeNote(Note $note): self
+    // {
+    //     if ($this->notes->removeElement($note)) {
+    //         // set the owning side to null (unless already changed)
+    //         if ($note->getUser() === $this) {
+    //             $note->setUser(null);
+    //         }
+    //     }
 
-        return $this;
-    }
+    //     return $this;
+    // }
 
     /**
      * @return Collection<int, regime>
@@ -248,7 +248,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this->regime;
     }
 
-    public function addRegime(regime $regime): self
+    public function addRegime(Regime $regime): self
     {
         if (!$this->regime->contains($regime)) {
             $this->regime->add($regime);
@@ -257,7 +257,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
-    public function removeRegime(regime $regime): self
+    public function removeRegime(Regime $regime): self
     {
         $this->regime->removeElement($regime);
 
@@ -272,7 +272,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this->allergene;
     }
 
-    public function addAllergene(allergene $allergene): self
+    public function addAllergene(Allergene $allergene): self
     {
         if (!$this->allergene->contains($allergene)) {
             $this->allergene->add($allergene);
@@ -281,7 +281,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
-    public function removeAllergene(allergene $allergene): self
+    public function removeAllergene(Allergene $allergene): self
     {
         $this->allergene->removeElement($allergene);
 

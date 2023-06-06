@@ -25,7 +25,7 @@ class Note
 
     #[ORM\ManyToOne(inversedBy: 'notes')]
     #[ORM\JoinColumn(nullable: false)]
-    private ?recette $recette = null;
+    private ?Recette $recette = null;
 
     #[ORM\ManyToOne(inversedBy: 'notes')]
     #[ORM\JoinColumn(nullable: false)]
@@ -72,19 +72,19 @@ class Note
         return $this;
     }
 
-    public function getRecette(): ?recette
+    public function getRecette(): ?Recette
     {
         return $this->recette;
     }
 
-    public function setRecette(?recette $recette): self
+    public function setRecette(?Recette $recette): self
     {
         $this->recette = $recette;
 
         return $this;
     }
 
-    public function getUser(): ?user
+    public function getUser(): ?User
     {
         return $this->user;
     }
