@@ -4,9 +4,15 @@
 
 {% block body %}
 
-<h1 class="text-center my-2">
-    INSCRIPTION
-</h1>
+    <div class="px-2 myWidth max-500 mx-auto">
+        <h1 class="text-center my-2">
+            CONTACT
+        </h1>
+        <div class="text-center">
+           Pour que je vous contacte, merci de vous enregistrer :
+        </div>
+    </div>
+
 
 <div class="p-2">
     <article class="container-sm mx-auto myWidth max-500 ">
@@ -30,7 +36,7 @@
 
                     {# {{ form_row(registrationForm.agreeTerms) }} #}
 
-                    <button type="submit" class="btn btn-outline-info btn-lg my-4">s'enregistrer</button>
+                    <button type="submit" class="btn btn-outline-info btn-lg my-4 w-100">s'enregistrer</button>
                 {{ form_end(registrationForm) }}
 
             </div>

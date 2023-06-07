@@ -1,9 +1,11 @@
-<nav class="navbar navbar-expand-sm">
+<nav class="navbar navbar-expand-sm pt-3">
   <div class="container-fluid">
 
-    <a class=" myTitle" href="#">
-      Sandrine Coupart
-    </a>
+    <div>
+      <a class="myTitle" href="{{ path('app_index') }}">
+        Sandrine Coupart
+      </a>
+    </div>
 
     <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
@@ -31,7 +33,7 @@
           </li>
         
           <li class="nav-item">
-            <a class="nav-link" href="#">Contact</a>
+            <a class="nav-link" href="{{ path('app_register') }}">Contact</a>
           </li>
         
 
@@ -39,15 +41,13 @@
         {% if app.user %}
         {# USER IS ALREADY CONNECTED #}
           <a class="nav-link myBtonConnect p-0 px-1 m-sm-2 mx-sm-3 " id="cx" href="{{ path('app_login') }}">
-          {# <a class="nav-link myBtonConnect p-0 px-1 m-sm-2 mx-sm-3 " id="cx" href="#"> #}
-            <span class="bi bi-person-check-fill">
+            <span class="bi bi-person-check-fill text-success">
             </span>                    
           </a>
         {% else %}   
         {# USER IS NOT CONNECTED #}
         <li class="nav-item mb-1">
           <a class="nav-link myBtonConnect p-0 px-1 m-sm-2 mx-sm-3 " id="cx" href="{{ path('app_login') }}">
-          {# <a class="nav-link myBtonConnect p-0 px-1 m-sm-2 mx-sm-3 " id="cx" href="#"> #}
             <span class="bi bi-person-fill">
             </span>                    
           </a>

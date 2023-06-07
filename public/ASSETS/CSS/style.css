@@ -50,7 +50,6 @@ font-family: 'Varela Round', sans-serif;
 }
 
 .myTitle{
-  color: var(--colorApricot);
   font-family:var(--font0);
 }
 h1{
@@ -67,16 +66,21 @@ h2{
   height: auto;
 }
 
+.myHead{
+  height: 150px;
+}
+
 .myHeader{
-  /* height: 100%; */
-  height: 4em;
+  height: 75px;
   background-color: var(--colorApricot);
   box-shadow: 0 10px 10px rgba(0, 0, 0, 0.7) ;
+  /* border-bottom-left-radius: 5px; */
+  border-bottom-right-radius: 50px;
+
 }
 
 .roundApricot{
   display: block;
-  /* height: 100px; */
   height: 100%;
   border-top-left-radius: 150px;
   border-top-right-radius: 50px;
@@ -86,7 +90,6 @@ h2{
 
 .roundJade{
   display: block;
-  /* height: 100px; */
   height: 100%;
   border-top-left-radius: 50px;
   border-top-right-radius: 80px;
@@ -117,9 +120,6 @@ h2{
   max-width: 500px;
 }
 
-
-
-
 /*
 .arab1{
   width: 45vw;
@@ -142,32 +142,8 @@ h2{
   box-shadow: inset 0 0.5em 1.5em rgba(0, 0, 0, .1), inset 0 0.125em 0.5em rgba(0, 0, 0, .15);
 }
 */
-body{
-  padding: 0;
-  background-color: white;
-  color: black;
-  align-items: center;
-  justify-content: center;
-  height: 100vh;
-  font-family: var(--font2);
-  line-height: 140%;
-  font-size: 1.2rem;
-}
 
-/* html{
-  font-size: 16px;
-  line-height: 40px;
-} */
 
-.myHead{
-  /* position:fixed; */
-  /* z-index: 2; */
-  /* top: 0;
-  left: 0px;
-  right: 0; */
-  transition: .7s ease;
-  height: 150px;
-}
 
 .btonContact{
   display: block;
@@ -181,7 +157,6 @@ body{
   border-radius: 45px;
   text-align: center;
   padding: 10px;
-  /* box-shadow: darkslategrey; */
   box-shadow: inset 0 0.5em 1.5em rgba(0, 0, 0, .1), inset 0 0.125em 0.5em rgba(0, 0, 0, .15),0 0.125em 0.5em rgba(0, 0, 0, .55);
   text-decoration: none;
   cursor: pointer;
@@ -191,4 +166,16 @@ body{
   box-shadow: inset 0 0em 1.5em rgba(35, 232, 97, 0.9), 0 0.125em 0.5em rgba(149, 238, 6, 0.95);
   color: var(--colorCo);
   background-color: yellow;
+}
+
+body{
+  padding: 0;
+  background-color: white;
+  color: black;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  font-family: var(--font2);
+  line-height: 140%;
+  font-size: 1.2rem;
 }
