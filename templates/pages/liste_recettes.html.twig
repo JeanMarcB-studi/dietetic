@@ -1,0 +1,71 @@
+{% extends 'base_pages.html.twig' %}
+
+{% block title %}Mes Recettes{% endblock %}
+
+{% block body %}
+
+<article class="container-fluid ">
+    <div class="row">
+
+        <h1 class="col-12 text-center">
+            MES RECETTES
+        </h1>
+    
+    <pre>
+        {{ dump(regimes) }}
+    </pre>
+
+        <h2 class="h2 text-center">
+            Soyons gourmands !
+        </h2>
+    </div>   
+</article>
+
+<!-- myCSS -->
+<link rel="stylesheet" href="{{ asset('ASSETS/CSS/style_recettes.css') }}">
+
+<div class="myImages mealPic mx-auto">
+    <img src="{{ asset('ASSETS/IMG/img8.jpg') }}" class="myImages mealPic" alt="photo tomates" srcset="">
+</div>
+
+<div class="container">
+    <div class="row border align-content-center">
+
+        {# LOOP ON THE DIFFERENT RECEIPES -------------------------------------- #}
+        {% for recette in recettes %}
+
+            {# SHOW 1 RECEIPE #}
+            <article class="col-12 col-lg-6 col-xl-4 text-center my-2 p-2">
+            
+                <div class="menu p-5 mx-auto h-100">
+
+                    <h2 class="mb-0 px-0 menuTitre">
+                        {{ recette.titre }} {# ex: tarte aux framboises #}
+                    </h2>
+                    {# <img src="{{ asset('ASSETS/IMG/arab2.png') }}" class="arab1 mb-3" alt="" srcset=""> #}
+                    <div class="">
+                        {{ recette.description }} {# ex: cette tarte croustillante en 30 minutes #}
+                    </div>
+
+                </div>
+
+            </article>
+
+            {% endfor %}
+            {# /LOOP ON THE DIFFERENT RECEIPES ------------------------------------- #}
+
+        </div>
+        </div>
+
+    </div>
+</div>
+
+
+
+<div class="block-100"></div>
+
+
+<div class=" container">
+</div>
+
+{% endblock %}

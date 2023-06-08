@@ -21,9 +21,9 @@ font-family: 'Varela Round', sans-serif;
 
 :root {  
   --colorCoffee: #573D1C;
-  --colorApricot: #FFC6AC;
+  --colorApricot: rgb(255, 198, 172);
   --colorPear: #C1DF1F; 
-  --colorJade: #00A878;
+  --colorJade: #00a878;
 
   --font0: 'Qwitcher Grypen', cursive;
   --font1: 'Varela Round', sans-serif;
