@@ -28,14 +28,11 @@ class RecetteController extends AbstractController
             'controller_name' => 'RecetteController',
             'recettes' => $RecetteRepository->findAll(),
             'regimes' => $this->lstRegime(),
+            'allergenes' => $this->lstAllergene(),
+            'lstFac' => $this->lstFact($RecetteRepository),
         ]);
     }
 
-    // private function lstRegimes(RegimeRepositorysitory $regimeRepository){
-        
-    // }
-
-    // public function testA(request $request, UserInterface $user, UserRepository $UserRepository ): string
     private function lstRegime(): array
     {
         $regimes = array();
@@ -53,23 +50,41 @@ class RecetteController extends AbstractController
             
             // dump ($regimes->getValues());
             $regimes = $user->getRegime()->getValues();
-            
-        // foreach($regimes as $regime){
-        //     dump ($regime);
-        // }
-
-        // $allergenes = $user->getAllergene();
-        // $allergenes->initialize();
-        // dump ($allergenes->getValues());
-        
-        
-        // dd($user);
-    }
-
-
+        }
         return($regimes);
     }
-    
+
+    private function lstAllergene(): array
+    {
+        $allergene = array();
+        
+        //RECUPERER LE USER CONNECTE
+        $user = $this->getUser();
+        
+        //IF USER IS CONNECTED
+        if ($user)
+        {
+            //INITIALISER POUR RECUPERER LES REGIMES
+            $user->getAllergene()->initialize();
+            
+            // dump ($regimes->getValues());
+            $allergene = $user->getAllergene()->getValues();
+        }
+        return($allergene);
+    }
+
+    private function lstFact(RecetteRepository $repo): array
+    {
+        $lstFac = array();
+
+        //RECUPERER LE USER CONNECTE
+        $user = $this->getUser();
+
+        //IF USER IS CONNECTED
+        if ($user)
+        $lstFac = $repo->queryOkRegime($user->getId());
+        return($lstFac);
+    } 
 
 
 }

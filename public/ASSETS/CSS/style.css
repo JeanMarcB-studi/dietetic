@@ -47,6 +47,7 @@ font-family: 'Varela Round', sans-serif;
 }
 .myJade{
   color: var(--colorJade);
+  text-align: justify;
 }
 
 .myTitle{

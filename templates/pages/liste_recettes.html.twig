@@ -4,29 +4,76 @@
 
 {% block body %}
 
+<!-- myCSS -->
+<link rel="stylesheet" href="{{ asset('ASSETS/CSS/style_recettes.css') }}">
+
 <article class="container-fluid ">
     <div class="row">
 
         <h1 class="col-12 text-center">
             MES RECETTES
         </h1>
-    
+{#     
     <pre>
         {{ dump(regimes) }}
-    </pre>
+        {{ dump(allergenes) }}
+    </pre> #}
 
         <h2 class="h2 text-center">
             Soyons gourmands !
         </h2>
     </div>   
+
+
+    <div class="myImages mealPic mx-auto">
+        <img src="{{ asset('ASSETS/IMG/img8.jpg') }}" class="myImages mealPic" alt="photo tomates" srcset="">
+    </div>
+
+    {% if app.user %}
+    {# USER IS ALREADY CONNECTED #}
+        {% if app.user.estClient %}
+
+            {# USER HAS BEEN TAGGED AS A CUSTOMER #}
+            <div class="row ">
+                <div class="col mx-auto myWidth border my-4 px-4 py-4 roundApricot">
+                    <h2 class="text-center">
+                        Bonjour {{ app.user.prenom }} 
+                    </h2>
+                    <div class="myJade px-4 text-justify">
+                        <p class="text-justify">
+                        Les recettes que vous voyez ici, je les ai sélectionnées tout spécialement pour vous, en tenant compte de nos entretiens.
+                        </p>
+                    </div>
+                    
+                    <div>
+                        <br>Rappel, vos régimes :
+                        <ul>
+                            {% for item in regimes %}
+                                <li>
+                                    {{ item }}
+                                </li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+
+                    <div>
+                        <br>Vos allergies connues :
+                        <ul>
+                            {% for item in allergenes %}
+                                <li>
+                                    {{ item }}
+                                </li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+
+                </div>
+            </div>
+
+        {% endif %}
+    {% endif %}
+
 </article>
-
-<!-- myCSS -->
-<link rel="stylesheet" href="{{ asset('ASSETS/CSS/style_recettes.css') }}">
-
-<div class="myImages mealPic mx-auto">
-    <img src="{{ asset('ASSETS/IMG/img8.jpg') }}" class="myImages mealPic" alt="photo tomates" srcset="">
-</div>
 
 <div class="container">
     <div class="row border align-content-center">
