@@ -1,20 +1,20 @@
 <?php
 
 namespace App\Controller;
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
+// use Doctrine\Common\Collections\ArrayCollection;
+// use Doctrine\Common\Collections\Collection;
 use Symfony\Component\HttpFoundation\Request;
-use App\Entity\User;
-use Symfony\Component\Security\Http\Attribute\CurrentUser;
-use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
-use Symfony\Component\Security\Core\User\UserInterface;
-use EasyCorp\Bundle\EasyAdminBundle\Field\AssociationField;
+// use App\Entity\User;
+// use Symfony\Component\Security\Http\Attribute\CurrentUser;
+// use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
+// use Symfony\Component\Security\Core\User\UserInterface;
+// use EasyCorp\Bundle\EasyAdminBundle\Field\AssociationField;
 
 
 use App\Repository\RecetteRepository;
-use App\Repository\RegimeRepository;
-use App\Repository\UserRepository;
-use Doctrine\ORM\PersistentCollection;
+// use App\Repository\RegimeRepository;
+// use App\Repository\UserRepository;
+// use Doctrine\ORM\PersistentCollection;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -25,11 +25,12 @@ class RecetteController extends AbstractController
     public function index(RecetteRepository $RecetteRepository,request $request): Response
     {
         return $this->render('pages/liste_recettes.html.twig', [
-            'controller_name' => 'RecetteController',
-            'recettes' => $RecetteRepository->findAll(),
+            // 'controller_name' => 'RecetteController',
+            // 'recettes' => $RecetteRepository->findAll(),
             'regimes' => $this->lstRegime(),
             'allergenes' => $this->lstAllergene(),
-            'lstFac' => $this->lstFact($RecetteRepository),
+            'lstRecettes' => $this->lstRecettes($RecetteRepository),
+            'lstNotes' => $RecetteRepository->queryNotes(),
         ]);
     }
 
@@ -73,17 +74,17 @@ class RecetteController extends AbstractController
         return($allergene);
     }
 
-    private function lstFact(RecetteRepository $repo): array
+    private function lstRecettes(RecetteRepository $repo): array
     {
-        $lstFac = array();
+        $recettes = array();
 
         //RECUPERER LE USER CONNECTE
         $user = $this->getUser();
 
         //IF USER IS CONNECTED
         if ($user)
-        $lstFac = $repo->queryOkRegime($user->getId());
-        return($lstFac);
+        $recettes = $repo->queryOkRegime($user->getId());
+        return($recettes);
     } 
 
 

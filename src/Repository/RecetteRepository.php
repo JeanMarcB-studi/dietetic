@@ -45,23 +45,23 @@ class RecetteRepository extends ServiceEntityRepository
         $conn = $this->getEntityManager()->getConnection();
     
         $sql = "
-        SELECT R.*, 
-        FROM recette AS R
+        SELECT *
+        FROM recette
         WHERE id in
 
         (
             SELECT DISTINCT (recette_id) 
             FROM `recette_regime`
-            WHERE regime_id IN (                
+            WHERE regime_id IN (
                     SELECT regime_id 
                     FROM user_regime
                     WHERE user_id = $user_id)
-            
+
             EXCEPT
-            
+
             SELECT DISTINCT (recette_id) 
             FROM `recette_allergene`
-            WHERE allergene_id NOT IN (                
+            WHERE allergene_id NOT IN (
                     SELECT allergene_id 
                     FROM user_allergene
                     WHERE user_id = $user_id)
@@ -73,8 +73,8 @@ class RecetteRepository extends ServiceEntityRepository
         $stmt = $conn->prepare($sql);
         $resultSet = $stmt->executeQuery();
 
-        dd($resultSet->fetchAllAssociative());
         // returns an array of arrays (i.e. a raw data set)
+        // dd($resultSet->fetchAllAssociative());
         return $resultSet->fetchAllAssociative();
     }
 
@@ -84,8 +84,8 @@ class RecetteRepository extends ServiceEntityRepository
     
         $sql = "
         SELECT recette_id,  
-        AVG(note),
-        COUNT(note)
+        AVG(note) AS notemoyenne,
+        COUNT(note) AS nbvotes
         FROM note
         ORDER BY 1
         ";
@@ -93,8 +93,8 @@ class RecetteRepository extends ServiceEntityRepository
         $stmt = $conn->prepare($sql);
         $resultSet = $stmt->executeQuery();
 
-        dd($resultSet->fetchAllAssociative());
         // returns an array of arrays (i.e. a raw data set)
+        // dd($resultSet->fetchAllAssociative());
         return $resultSet->fetchAllAssociative();
     }
 
