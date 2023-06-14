@@ -55,6 +55,10 @@ class Recette
         $this->allergene = new ArrayCollection();
         $this->notes = new ArrayCollection();
     }
+    public function __toString()
+    {
+        return $this->getId();
+    }
 
     public function getId(): ?int
     {

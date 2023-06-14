@@ -1,13 +1,17 @@
 <?php
 
 namespace App\Controller;
+
+use App\Entity\Note;
 use App\Entity\Recette;
+use App\Form\NoteType;
+use App\Repository\NoteRepository;
 use App\Repository\RecetteRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Request;
-
+use Doctrine\ORM\EntityManagerInterface;
 use EasyCorp\Bundle\EasyAdminBundle\Field\AssociationField;
 
 
@@ -69,56 +73,58 @@ class RecetteController extends AbstractController
 
         //IF USER IS CONNECTED
         if ($user)
-        $recettes = $repo->queryOkRegime($user->getId());
-        return($recettes);
+            $recettes = $repo->queryOkRegime($user->getId());
+            return($recettes);
     } 
 
 
     #[Route('/recette/{id}', name: 'app_detail_recette', requirements:['id' => '\d+'])]
-    public function detail(RecetteRepository $RecetteRepository,request $request): Response
+    public function detail(
+        RecetteRepository $RecetteRepository,
+        request $request,
+        EntityManagerInterface $entityManager
+        ): Response
     {
 
         $idRecette = $request->attributes->get('id');
-
         $recette = ($RecetteRepository->find($idRecette));
 
-        $recette->getAllergene()->initialize();
-        $allergenes = $recette->getAllergene()->getValues();
-        // dump($allergene);
-        
         $recette->getRegime()->initialize();
-        $regimes = $recette->getRegime()->getValues();
-        // dd($regime);
+        $recette->getAllergene()->initialize();
+        // $allergenes = $recette->getAllergene()->getValues();
+
+        $user = $this->getUser();
+        $idUser = $user->getId();
+
+        $form = $this->createForm(NoteType::class, $note);
+        $form->handleRequest($request);
+        
+        // if ($form->isSubmitted() && $form->isValid()){
+        if ($form->isSubmitted()){
+            dd($form);
+            
+            
+            $req = $request->request;
+            $avis = trim($req->get('avis'));
+            $noteVal = (int)$req->get('note');
+            $today = new \DateTime();
+            
+            $note = new Note();
+            $note->setAvis($avis);
+            $note->setNote($noteVal);
+            $note->setDateAvis($today);
+            $note->setRecette($idRecette);
+            $note->setUser($idUser);
+            
+            $entityManager->persist($note);
+            $entityManager->flush();
+        }
 
         return $this->render('pages/detail_recette.html.twig', [
-            'allergenes' => $this->lstAllergene(),
-            'recette' => $RecetteRepository->find($idRecette),
-            'recetteAllergenes' => $allergenes,
-            'recetteRegimes' => $regimes,
+            'recette' => $recette,
+            'form' => $form->createView(),
         ]);
     }
 
-//     // private function RecettelstRegime(Recette $Recette, $idRecette): array
-//     private function RecettelstRegime($idRecette): array
-//     {
-//         $recette = $this->getRecette;
-// dd($recette);
-
-//         $regimes = array();
-        
-//         //IF USER IS CONNECTED
-//         if ($idRecette)
-//         {
-//             $recette= new Recette();
-//             dd($recette);
-//             dd($recette->getRegime($idRecette));
-//             //INITIALISER POUR RECUPERER LES REGIMES
-//             $RecetteRepository->getRegime()->initialize();
-            
-//             dd ($RecetteRepository->getRegime()->getValues());
-//             $regimes = $RecetteRepository->getRegime()->getValues();
-//         }
-//         return($regimes);
-//     }
 
 }

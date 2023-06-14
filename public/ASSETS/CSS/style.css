@@ -110,6 +110,9 @@ h2{
   border: 4px solid var(--colorJade);
   border-top: 0;
 }
+.borderApricot{
+  border: 4px solid var(--colorApricot);
+}
 
 .roundJade{
   display: block;
@@ -137,7 +140,7 @@ h2{
   max-width: 300px;
 }
 .max-400{
-  max-width: 300px;
+  max-width: 400px;
 }
 .max-500{
   max-width: 500px;

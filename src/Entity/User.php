@@ -65,6 +65,11 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         $this->regime = new ArrayCollection();
         $this->allergene = new ArrayCollection();
     }
+    
+    public function __toString()
+    {
+        return $this->getId();
+    }
 
     public function getId(): ?int
     {

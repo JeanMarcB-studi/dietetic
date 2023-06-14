@@ -20,28 +20,32 @@
         </div>    
 
         
-<article class="container-fluid border py-3">
+<article class="container-fluid borderApricot py-3">
     <div class="row max-1800 mx-auto">
 
-        
-        <div class="col-12">
-            <div>
-                {{ recette.description|capitalize }}
+        {# Show times to prepare this receipe #}
+        <div class="col-12 col-lg-6">
+            <div class="max-400 mx-auto mb-3">
+                <p class="">
+                    {{ recette.description|capitalize }}
+                </p>
             </div>
-            
+        </div>    
+        <div class="col-12 col-lg-6">
+
             {% if (recette.tempsPreparation) %}
                 <div>
-                    Temps de préparation : {{ recette.tempsPreparation|date('H:i') }}
+                    Temps de préparation : {{ recette.tempsPreparation|date('H:i') }} heures
                 </div>
             {% endif %}
             {% if (recette.tempsPreparation) %}
                 <div>
-                    Temps de repos : {{ recette.tempsRepos|date('H:i') }}
+                    Temps de repos : {{ recette.tempsRepos|date('H:i') }} heures
                 </div>
             {% endif %}
             {% if (recette.tempsPreparation) %}
                 <div>
-                    Temps de cuisson : {{ recette.tempsCuisson|date('H:i') }}
+                    Temps de cuisson : {{ recette.tempsCuisson|date('H:i') }} heures
                 </div>
             {% endif %}
         </div>
@@ -53,10 +57,10 @@
                     {{ regime.titre }}
                 </span>
             {% endfor %}
-        </div>
+        {# </div> #}
 
         {# Show list of allergenes for this receipe #}
-        <div class="col-12 text-center">
+        {# <div class="col-12 text-center"> #}
             {% for allergene in recette.allergene.snapshot %}
                 <span class="regime bg-danger">
                     {{ allergene.titre }}
@@ -66,10 +70,10 @@
 
 
     </div>
-    <div class="row max-1400 mx-auto">
+    <div class="row max-1400 mx-auto mt-4">
 
-        <div class="col-12 col-lg-6 px-5 max-50">
-            <div class="borderJade rounded-4 p-4 my-3">
+        <div class="col-12 col-lg-6 p-0 px-lg-4">
+            <div class="borderJade rounded-4 p-1 p-lg-4 my-3">
                 <h3 class="myJade">
                     Ingrédients :
                 </h3>
@@ -79,8 +83,8 @@
             </div>
         </div>
 
-        <div class="col-12 col-lg-6 px-5 max-50">
-            <div class="borderJade rounded-4 p-4 my-3">
+        <div class="col-12 col-lg-6 p-0 px-lg-4">
+            <div class="borderJade rounded-4 p-1 p-lg-4 my-3">
                 <h3 class="myJade">
                     Préparation :
                 </h3>
@@ -98,6 +102,29 @@
 </article>
 </div>
 
+<form class="container-fluid borderApricot py-3">
+    <div class="row max-500 mx-auto">
+
+        {# Show times to prepare this receipe #}
+        <div class="col-12">
+
+            {{ form_start(form) }}
+
+            {{ form_label(form.avis) }}
+            {{ form_widget(form.avis) }}
+            
+            {{ form_label(form.note) }}
+            {{ form_widget(form.note) }}
+
+            {{ form_rest(form) }}
+
+
+            <button type="submit">Enregistrer</button>
+            {{ form_end(form) }}
+
+        </div>
+    </div>
+</form>
 
 
 <div class="block-100"></div>
