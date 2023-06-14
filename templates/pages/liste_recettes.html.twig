@@ -37,65 +37,66 @@
 {% if app.user %}
 {# USER IS ALREADY CONNECTED #}
     {% if app.user.estClient %}
+        <div class="p-1">
+            {# USER HAS BEEN TAGGED AS A CUSTOMER #}
+            <article class="container-fluid mx-auto myWidth my-0 mt-4 px-4 pb-0 pt-4 roundApricot borderJadeTop">
+                <div class="row ">
+                    <div class="col ">
+                        <h2 class="  text-end text-sm-center">
+                            Bonjour {{ app.user.prenom|capitalize }}, 
+                        </h2>
+                        <div class="myJade px-4 text-justify">
+                            <p class="text-justify">
+                            Les recettes que vous voyez ici, je les ai sélectionnées tout spécialement pour vous, en tenant compte de nos entretiens.
+                            </p>
+                        </div>
+                    </div>    
+                </div>
 
-        {# USER HAS BEEN TAGGED AS A CUSTOMER #}
-        <article class="container-fluid mx-auto myWidth my-0 mt-4 px-4 pb-0 pt-4 roundApricot">
-            <div class="row ">
-                <div class="col ">
-                    <h2 class="text-center">
-                        Bonjour {{ app.user.prenom|capitalize }}, 
-                    </h2>
-                    <div class="myJade px-4 text-justify">
-                        <p class="text-justify">
-                        Les recettes que vous voyez ici, je les ai sélectionnées tout spécialement pour vous, en tenant compte de nos entretiens.
+                <div class="row mb-0">
+                    <div class = "col-12 col-sm-6">
+                        <p class="text-center mb-0 text-white">
+                            Rappel, vos régimes :
                         </p>
+                        <ul class = "px-sm-5 mb-0">
+                            {% if (regimes|length == 0) %}
+                                <li>
+                                    Aucun régime prescrit.
+                                </li>
+                            {% else %}
+                                {% for item in regimes %}
+                                    <li>
+                                        {{ item|capitalize }}
+                                    </li>
+                                {% endfor %}
+                            {% endif %}
+                        </ul>
                     </div>
-                </div>    
-            </div>
 
-            <div class="row mb-0">
-                <div class = "col-12 col-sm-6">
-                    <p class="text-center">
-                        Rappel, vos régimes :
-                    </p>
-                    <ul class = "px-sm-5">
-                        {% if (regimes|length == 0) %}
-                            <li>
-                                Aucun régime prescrit.
-                            </li>
-                        {% else %}
-                            {% for item in regimes %}
+                    <div  class = "col-12 col-sm-6">
+                        <p class="text-center mb-0 text-white">
+                            Vos allergies :
+                        </p>
+                        <ul class = "px-sm-5 mb-0">
+                            {% if (allergenes|length == 0) %}
                                 <li>
-                                    {{ item }}
+                                    Aucune allergie connue.
                                 </li>
-                            {% endfor %}
-                        {% endif %}
-                    </ul>
-                </div>
+                            {% else %}
+                                {% for item in allergenes %}
+                                    <li>
+                                        {{ item|capitalize }}
+                                    </li>
+                                {% endfor %}
+                            {% endif %}
+                        </ul>
+                    </div>
 
-                <div  class = "col-12 col-sm-6">
-                    <p class="text-center">
-                        Vos allergies :
-                    </p>
-                    <ul class = "px-sm-5">
-                        {% if (allergenes|length == 0) %}
-                            <li>
-                                Aucune allergie connue.
-                            </li>
-                        {% else %}
-                            {% for item in allergenes %}
-                                <li>
-                                    {{ item }}
-                                </li>
-                            {% endfor %}
-                        {% endif %}
-                    </ul>
                 </div>
+            </article>
 
+            <div class="container-fluid mx-auto myWidth my-0 px-4 py-0 roundApricotBottom borderJadeBottom">
             </div>
-        </article>
-
-        <div class="container-fluid mx-auto myWidth my-0 px-4 py-0 roundApricotBottom">
         </div>
 
     {% endif %}
@@ -103,27 +104,29 @@
 
 
 <div class="container">
-    <div class="row border align-content-center">
+    <div class="row  align-content-center">
 
         {# LOOP ON THE DIFFERENT RECEIPES -------------------------------------- #}
         {% for recette in lstRecettes %}
 
             {# SHOW 1 RECEIPE #}
-            <article class="col-12 col-lg-6 col-xl-4 text-center my-2 p-2">
+            <a class="col-12 col-lg-6 col-xl-4 text-center my-2 p-2"
+                {# prepare link if click #}
+                href="{{ path('app_detail_recette',{'id': recette.id}) }}">
             
-                <div class="menu p-5 mx-auto h-100">
+                <button type="button" class="recette p-4 mx-auto h-100 ">
 
-                    <h2 class="mb-0 px-0 menuTitre">
-                        {{ recette.titre }} {# ex: tarte aux framboises #}
+                    <h2 class="mb-0 px-0 recetteTitre">
+                        {{ recette.titre|capitalize }} {# ex: tarte aux framboises #}
                     </h2>
                     {# <img src="{{ asset('ASSETS/IMG/arab2.png') }}" class="arab1 mb-3" alt="" srcset=""> #}
                     <div class="">
-                        {{ recette.description }} {# ex: cette tarte croustillante en 30 minutes #}
+                        {{ recette.description|capitalize }} {# ex: cette tarte croustillante en 30 minutes #}
                     </div>
 
-                </div>
+                </button>
 
-            </article>
+            </a>
 
             {% endfor %}
             {# /LOOP ON THE DIFFERENT RECEIPES ------------------------------------- #}

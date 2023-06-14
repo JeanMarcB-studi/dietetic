@@ -1,0 +1,109 @@
+{% extends 'base_pages.html.twig' %}
+
+{% block title %}Fiche de Recette{% endblock %}
+
+{% block body %}
+
+<!-- myCSS -->
+<link rel="stylesheet" href="{{ asset('ASSETS/CSS/style_recettes.css') }}">
+
+<div class="p-1 p-sm-5">
+
+        <div class="col-12 roundApricot py-2">
+            <h2 class="text-center">
+                FICHE DE RECETTE
+            </h2>
+
+            <h1 class="h2 text-center">
+                {{ recette.titre|capitalize }}
+            </h1>
+        </div>    
+
+        
+<article class="container-fluid border py-3">
+    <div class="row max-1800 mx-auto">
+
+        
+        <div class="col-12">
+            <div>
+                {{ recette.description|capitalize }}
+            </div>
+            
+            {% if (recette.tempsPreparation) %}
+                <div>
+                    Temps de préparation : {{ recette.tempsPreparation|date('H:i') }}
+                </div>
+            {% endif %}
+            {% if (recette.tempsPreparation) %}
+                <div>
+                    Temps de repos : {{ recette.tempsRepos|date('H:i') }}
+                </div>
+            {% endif %}
+            {% if (recette.tempsPreparation) %}
+                <div>
+                    Temps de cuisson : {{ recette.tempsCuisson|date('H:i') }}
+                </div>
+            {% endif %}
+        </div>
+
+        {# Show list of Regimes for this receipe #}
+        <div class="col-12 text-center">
+            {% for regime in recette.regime.snapshot %}
+                <span class="regime">
+                    {{ regime.titre }}
+                </span>
+            {% endfor %}
+        </div>
+
+        {# Show list of allergenes for this receipe #}
+        <div class="col-12 text-center">
+            {% for allergene in recette.allergene.snapshot %}
+                <span class="regime bg-danger">
+                    {{ allergene.titre }}
+                </span>
+            {% endfor %}
+        </div>
+
+
+    </div>
+    <div class="row max-1400 mx-auto">
+
+        <div class="col-12 col-lg-6 px-5 max-50">
+            <div class="borderJade rounded-4 p-4 my-3">
+                <h3 class="myJade">
+                    Ingrédients :
+                </h3>
+                <div>
+                    {{ recette.ingredients|capitalize }}
+                </div>
+            </div>
+        </div>
+
+        <div class="col-12 col-lg-6 px-5 max-50">
+            <div class="borderJade rounded-4 p-4 my-3">
+                <h3 class="myJade">
+                    Préparation :
+                </h3>
+                <div>
+                    {{ recette.preparation|capitalize }}
+                </div>
+            </div>
+        </div>
+        {# <div class="myImages mealPic mx-auto">
+            <img src="{{ asset('ASSETS/IMG/img8.jpg') }}" class="myImages mealPic" alt="photo tomates" srcset="">
+        </div> #}
+
+    </div>
+    </div>
+</article>
+</div>
+
+
+
+<div class="block-100"></div>
+
+
+<div class=" container">
+</div>
+
+{% endblock %}

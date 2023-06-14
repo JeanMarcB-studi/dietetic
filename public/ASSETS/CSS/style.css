@@ -36,6 +36,9 @@ font-family: 'Varela Round', sans-serif;
 .myPearBG{
   background-color: var(--colorPear);
 }
+.myJadeBG{
+  background-color: var(--colorJade);
+}
 .myCoffee{
   color: var(--colorCoffee)
 }
@@ -90,10 +93,22 @@ h2{
 
 .roundApricotBottom{
   display: block;
-  height: 50px;
+  height: 40px;
   background-color: var(--colorApricot);
-  border-bottom-left-radius: 50px;
+  border-bottom-left-radius: 150px;
   border-bottom-right-radius: 150px ;
+}
+
+.borderJade{
+  border: 4px solid var(--colorJade);
+}
+.borderJadeTop{
+  border: 4px solid var(--colorJade);
+  border-bottom: 0;  
+}
+.borderJadeBottom{
+  border: 4px solid var(--colorJade);
+  border-top: 0;
 }
 
 .roundJade{
@@ -127,6 +142,10 @@ h2{
 .max-500{
   max-width: 500px;
 }
+.max-1400{
+  max-width: 1400px;
+}
+
 
 /*
 .arab1{

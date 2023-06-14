@@ -3,7 +3,7 @@
   top: -21vw;
   text-shadow: 0 5px 5px black;
 }
-.menu{
+.recette{
   /* margin: 3px; */
   border: 3px solid var(--colorApricot);
   border-radius: 20px;
@@ -12,9 +12,20 @@
   max-width: 400px;
   min-height: 270px;
 }
-.menuTitre{
+.recetteTitre{
   min-height: 77px;
   text-shadow: 0px 0 7px var(--color2), 1px 1px 1px rgb(17, 41, 29, 70%);
+}
+
+.regime{
+  background-color: var(--colorJade);
+  color: white;
+  border-radius: 2000px;
+  margin: 0.1em;
+  padding: 0.2em;
+  padding-left: 0.8em;
+  padding-right: 0.8em;
+  display:inline-block;
 }
 
 /* RESPONSIVITY : WIDTH VALUES from 576px to 992px LARGE */

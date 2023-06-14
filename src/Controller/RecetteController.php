@@ -1,23 +1,15 @@
 <?php
 
 namespace App\Controller;
-// use Doctrine\Common\Collections\ArrayCollection;
-// use Doctrine\Common\Collections\Collection;
-use Symfony\Component\HttpFoundation\Request;
-// use App\Entity\User;
-// use Symfony\Component\Security\Http\Attribute\CurrentUser;
-// use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
-// use Symfony\Component\Security\Core\User\UserInterface;
-// use EasyCorp\Bundle\EasyAdminBundle\Field\AssociationField;
-
-
+use App\Entity\Recette;
 use App\Repository\RecetteRepository;
-// use App\Repository\RegimeRepository;
-// use App\Repository\UserRepository;
-// use Doctrine\ORM\PersistentCollection;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\HttpFoundation\Request;
+
+use EasyCorp\Bundle\EasyAdminBundle\Field\AssociationField;
+
 
 class RecetteController extends AbstractController
 {
@@ -25,8 +17,6 @@ class RecetteController extends AbstractController
     public function index(RecetteRepository $RecetteRepository,request $request): Response
     {
         return $this->render('pages/liste_recettes.html.twig', [
-            // 'controller_name' => 'RecetteController',
-            // 'recettes' => $RecetteRepository->findAll(),
             'regimes' => $this->lstRegime(),
             'allergenes' => $this->lstAllergene(),
             'lstRecettes' => $this->lstRecettes($RecetteRepository),
@@ -46,10 +36,8 @@ class RecetteController extends AbstractController
         {
             //$roles = $user->getRoles();
             
-            //INITIALISER POUR RECUPERER LES REGIMES
+            //INITIALISER PUIS RECUPERER LES REGIMES
             $user->getRegime()->initialize();
-            
-            // dump ($regimes->getValues());
             $regimes = $user->getRegime()->getValues();
         }
         return($regimes);
@@ -67,8 +55,6 @@ class RecetteController extends AbstractController
         {
             //INITIALISER POUR RECUPERER LES REGIMES
             $user->getAllergene()->initialize();
-            
-            // dump ($regimes->getValues());
             $allergene = $user->getAllergene()->getValues();
         }
         return($allergene);
@@ -87,5 +73,52 @@ class RecetteController extends AbstractController
         return($recettes);
     } 
 
+
+    #[Route('/recette/{id}', name: 'app_detail_recette', requirements:['id' => '\d+'])]
+    public function detail(RecetteRepository $RecetteRepository,request $request): Response
+    {
+
+        $idRecette = $request->attributes->get('id');
+
+        $recette = ($RecetteRepository->find($idRecette));
+
+        $recette->getAllergene()->initialize();
+        $allergenes = $recette->getAllergene()->getValues();
+        // dump($allergene);
+        
+        $recette->getRegime()->initialize();
+        $regimes = $recette->getRegime()->getValues();
+        // dd($regime);
+
+        return $this->render('pages/detail_recette.html.twig', [
+            'allergenes' => $this->lstAllergene(),
+            'recette' => $RecetteRepository->find($idRecette),
+            'recetteAllergenes' => $allergenes,
+            'recetteRegimes' => $regimes,
+        ]);
+    }
+
+//     // private function RecettelstRegime(Recette $Recette, $idRecette): array
+//     private function RecettelstRegime($idRecette): array
+//     {
+//         $recette = $this->getRecette;
+// dd($recette);
+
+//         $regimes = array();
+        
+//         //IF USER IS CONNECTED
+//         if ($idRecette)
+//         {
+//             $recette= new Recette();
+//             dd($recette);
+//             dd($recette->getRegime($idRecette));
+//             //INITIALISER POUR RECUPERER LES REGIMES
+//             $RecetteRepository->getRegime()->initialize();
+            
+//             dd ($RecetteRepository->getRegime()->getValues());
+//             $regimes = $RecetteRepository->getRegime()->getValues();
+//         }
+//         return($regimes);
+//     }
 
 }
