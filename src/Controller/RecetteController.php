@@ -13,7 +13,7 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Request;
 use Doctrine\ORM\EntityManagerInterface;
 use EasyCorp\Bundle\EasyAdminBundle\Field\AssociationField;
-
+use Symfony\Component\HttpFoundation\JsonResponse;
 
 class RecetteController extends AbstractController
 {
@@ -86,45 +86,83 @@ class RecetteController extends AbstractController
         ): Response
     {
 
+        // dump($request);
+
         $idRecette = $request->attributes->get('id');
         $recette = ($RecetteRepository->find($idRecette));
 
         $recette->getRegime()->initialize();
         $recette->getAllergene()->initialize();
         // $allergenes = $recette->getAllergene()->getValues();
-
-        $user = $this->getUser();
-        $idUser = $user->getId();
-
-        $form = $this->createForm(NoteType::class, $note);
-        $form->handleRequest($request);
-        
-        // if ($form->isSubmitted() && $form->isValid()){
-        if ($form->isSubmitted()){
-            dd($form);
-            
-            
-            $req = $request->request;
-            $avis = trim($req->get('avis'));
-            $noteVal = (int)$req->get('note');
-            $today = new \DateTime();
-            
-            $note = new Note();
-            $note->setAvis($avis);
-            $note->setNote($noteVal);
-            $note->setDateAvis($today);
-            $note->setRecette($idRecette);
-            $note->setUser($idUser);
-            
-            $entityManager->persist($note);
-            $entityManager->flush();
-        }
+       
+        // $form = $this->createForm(NoteType::class, $note);
+        // $form->handleRequest($request);        
+        // if ($form->isSubmitted()){
+        //     // if ($form->isSubmitted() && $form->isValid()){
+        //         dd($form);
+        // }
 
         return $this->render('pages/detail_recette.html.twig', [
             'recette' => $recette,
-            'form' => $form->createView(),
+            'idRecette' => $idRecette,
+            // 'idUser' => $idUser,           
+
+            // 'form' => $form->createView(),
         ]);
     }
+
+    // #[Route('/note/{idRecette}{note}{message}', 
+    #[Route('/note2/{idRecette}{note}', 
+        name: 'app_note_recette', 
+        // requirements:['idRecette' => '\d+', 'note' => '\d+'],
+        methods: ['GET'])]
+
+    public function createNote(
+        RecetteRepository $RecetteRepository,
+        request $request,
+        EntityManagerInterface $entityManager
+        ): JsonResponse
+    {
+// dd($request->attributes);
+dd($request);
+        $idRecette = $request->attributes->get('idRecette');
+        // dump($idRecette);
+        // $req = $request->request;
+        // $message = trim($req->get('message'));
+        // $noteVal = (int)$req->get('note');
+        // $today = new \DateTime();
+        // $user = $this->getUser();
+        // $idUser = $user->getId();
+        
+        // $note = new Note();
+        // $note->setAvis($message);
+        // $note->setNote($noteVal);
+        // $note->setDateAvis($today);
+        // $note->setRecette($idRecette);
+        // $note->setUser($idUser);
+        
+
+        // $entityManager->persist($note);
+        // $entityManager->flush();
+
+        return new JsonResponse([
+            'message' => 'Note enregistrée '.$idRecette,
+            'path' => 'src/Controller/RecetteController.php',
+        ]);
+    }
+
+
+    // #[Route('/api/createnote/{idRecette}', name: 'app_createnote', methods: ['POST'])]
+
+    #[Route('/api/createnote/{id}', name: 'app_createnote', methods: ['POST'])]
+    public function addNote(int $idRecette): JsonResponse
+    {
+
+        return new JsonResponse([
+            'message' => 'welcome to your new controller!',
+        ]);
+    }
+
 
 
 }

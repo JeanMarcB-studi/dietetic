@@ -9,17 +9,16 @@
 
 <div class="p-1 p-sm-5">
 
-        <div class="col-12 roundApricot py-2">
-            <h2 class="text-center">
-                FICHE DE RECETTE
-            </h2>
+    <div class="col-12 roundApricot py-2">
+        <h2 class="text-center">
+            FICHE DE RECETTE
+        </h2>
 
-            <h1 class="h2 text-center">
-                {{ recette.titre|capitalize }}
-            </h1>
-        </div>    
+        <h1 class="h2 text-center">
+            {{ recette.titre|capitalize }}
+        </h1>
+    </div>    
 
-        
 <article class="container-fluid borderApricot py-3">
     <div class="row max-1800 mx-auto">
 
@@ -102,29 +101,36 @@
 </article>
 </div>
 
+
+
 <form class="container-fluid borderApricot py-3">
     <div class="row max-500 mx-auto">
-
-        {# Show times to prepare this receipe #}
+        {# Nb of People  ------------------------------------------- #}
         <div class="col-12">
-
-            {{ form_start(form) }}
-
-            {{ form_label(form.avis) }}
-            {{ form_widget(form.avis) }}
-            
-            {{ form_label(form.note) }}
-            {{ form_widget(form.note) }}
-
-            {{ form_rest(form) }}
-
-
-            <button type="submit">Enregistrer</button>
-            {{ form_end(form) }}
-
+            <label for="note" class="form-label">Note :</label>
+            <div class="input-group flex-nowrap">
+                <span class="input-group-text" id="a1"><i class="bi bi-universal-access"></i></span>
+                <select class="form-select" id="note" name ='note'>
+                    <option value="5">*****</option>
+                    <option value="4">****</option>
+                    <option value="3">***</option>
+                    <option value="2">**</option>
+                    <option value="1">*</option>
+                </select>
+            </div>
         </div>
+        {# Message input #}
+        <div class="col-12">
+            <div class="form-outline mb-1 p-1">
+                <label for="message" class="form-label">Un message ?</label>
+                <textarea class="form-control py-0 lh-1 mb-3" id="message" name="message" rows="3"  placeholder="Avez vous un commentaire à faire sur cette recette ?">
+                </textarea>
+            </div>
+        </div>
+        <button class="col-4 btn btn-secondary" type="button" id="send">ENVOI</button>
     </div>
-</form>
+  </div>
+
 
 
 <div class="block-100"></div>
