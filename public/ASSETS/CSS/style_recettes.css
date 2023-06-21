@@ -28,6 +28,20 @@
   display:inline-block;
 }
 
+.star{
+  color: rgb(86, 86, 38);
+  color: white;
+  transition: transform .1s;
+}
+.star:hover{
+  color: var(--colorJade);
+  transform: rotate(0.5turn) !important;
+}
+.starSelected{
+  color: var(--colorJade);
+}
+
+
 /* RESPONSIVITY : WIDTH VALUES from 576px to 992px LARGE */
 @media (min-width: 576px){
 

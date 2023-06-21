@@ -21,18 +21,26 @@
 
 // }
 console.log("start engine")
+const idReceipe = parseInt(document.querySelector("#numReceipe").textContent)
+console.log("num : "+idReceipe)
 
 const url="https://127.0.0.1:8000/note/"
-const bton = document.querySelector("#send")
+const sendButton = document.querySelector("#send")
+const adrNote = document.querySelector("#note")
+const adrMess = document.querySelector("#message")
 
-bton.addEventListener('click', (e) => {
+sendButton.addEventListener('click', (e) => {
   console.log('click')
   // e.target.classList.add('btonQuarterSelected')
   
+console.log (adrMess.value)
+
   let data = JSON.stringify({
-    id: 'oss117',
-    name:"yyY"
+    idReceipe: idReceipe,
+    note: valNote,
+    message: adrMess.value
   })
+console.log("idReceipe: " + idReceipe)
 
 var request = new Request(url, {
   method: 'POST',
@@ -45,9 +53,35 @@ fetch(request)
 
 // RETURN DATA IS OK
 .then(response => {
-  console.log(response.id + " " + response.name)
+  console.log(response.idReceipe + " note: " + response.note + " " + response.message)
 })
 
 //IF ERROR
 .catch(error => console.log("Erreur : " + error));
+})
+
+
+const adrStars = document.querySelectorAll(".star")
+let valNote = 0
+
+adrStars.forEach(star => {
+
+  star.addEventListener('click', (e) => {
+    console.log('star' + e.target.dataset.value)
+    choiceNum = e.target.dataset.value
+    valNote = choiceNum
+    adrStars.forEach(star => {
+      if (star.dataset.value <= choiceNum)
+        { 
+          star.classList.add('bi-star-fill','starSelected') 
+          star.classList.remove('bi-star')
+        }
+        else
+        {
+          star.classList.add('bi-star') 
+          star.classList.remove('bi-star-fill','starSelected')
+        }
+    })
+  })
+
 })

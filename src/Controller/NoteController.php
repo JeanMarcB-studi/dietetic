@@ -19,12 +19,34 @@ class NoteController extends AbstractController
 
       $data = json_decode($request->getContent(), true);
       
-      $id = $data['id'];
-      $name = $data['name'];
+      $idReceipe = $data['idReceipe'];
+      $note = $data['note'];
+      $message = $data['message'];
+      $User = ($this->getUser());
+
+      // if (!$User) {
+      //   return new JsonResponse([
+      //     'message' => "Vous devez être connecté pour mettre un avis sur une recette",
+      //     'status' => 'KO'
+      //   ]);
+      // }
+
+      // if (!$User->est_client){
+      //   return new JsonResponse([
+      //     'message' => "Vous devez être client pour mettre un avis sur une recette",
+      //     'status' => 'KO'
+      //   ]);
+      // }
+
+      dump($this->getUser());
+
+      dump($idReceipe);
 
       return new JsonResponse([
-        'id' => $id,
-        'name' => $name,
+        'idReceipe' => $idReceipe,
+        'note' => $note,
+        'message' => $message,
+        'status' => 'OK'
       ]);
   }
 }
