@@ -26,7 +26,7 @@ console.log("start engine")
 
 // const url="http://localhost/PHP/symfo_diete/note/"
 // const url="https://127.0.0.1:8000/note2/"
-const url="https://127.0.0.1:8000/toto/"
+const url="https://127.0.0.1:8000/tata/"
 
 const bton = document.querySelector("#send")
 
