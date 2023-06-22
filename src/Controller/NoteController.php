@@ -2,6 +2,11 @@
 
 namespace App\Controller;
 
+use App\Entity\Note;
+use App\Entity\Recette;
+use App\Repository\NoteRepository;
+use App\Repository\RecetteRepository;
+use Exception;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request; //
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -14,40 +19,68 @@ use Symfony\Component\Routing\Annotation\Route;
 class NoteController extends AbstractController
 {
   #[Route('/note/', name: 'app_note')]
-  public function number(request $request): JsonResponse
+  public function number(request $request, NoteRepository $NoteRepository, RecetteRepository $RecetteRepository): JsonResponse
   {
 
       $data = json_decode($request->getContent(), true);
       
-      $idReceipe = $data['idReceipe'];
-      $note = $data['note'];
-      $message = $data['message'];
-      $User = ($this->getUser());
+      $idReceipe = (int)$data['idReceipe'];
+      $receipe = ($RecetteRepository->find($idReceipe));
+      // $receipe = $data['receipe'];
+      $noteVal = (int)$data['note'];
+      $message = trim($data['message']);
+      $user = ($this->getUser());
 
-      // if (!$User) {
-      //   return new JsonResponse([
-      //     'message' => "Vous devez être connecté pour mettre un avis sur une recette",
-      //     'status' => 'KO'
-      //   ]);
-      // }
+      if (!$user) {
+        return new JsonResponse([
+          'message' => "Vous devez être connecté pour mettre un avis sur une recette",
+          'status' => false
+        ]);
+      }
 
-      // if (!$User->est_client){
-      //   return new JsonResponse([
-      //     'message' => "Vous devez être client pour mettre un avis sur une recette",
-      //     'status' => 'KO'
-      //   ]);
-      // }
+      if (!$user->isEstClient()){
+        return new JsonResponse([
+          'message' => "Vous devez être client pour mettre un avis sur une recette",
+          'status' => false
+        ]);
+      }
 
-      dump($this->getUser());
+      if ((!$noteVal) or ($noteVal < '1') or ($noteVal > '5')){
+        return new JsonResponse([
+          'message' => "Vous devez mettre une note",
+          'status' => false
+        ]);        
+      }
 
-      dump($idReceipe);
+      try {
+
+        // PREPARE RECORDING
+        $note = new Note();
+        $today = new \DateTime();
+        $note->setAvis($message);
+        $note->setNote($noteVal);
+        $note->setDateAvis($today);
+      $note->setRecette($receipe);
+      $note->setUser($user);
+      
+      dump($note);
+      dump($request);
+
+      // SAVE THE NOTE
+      $NoteRepository->save($note, true);
 
       return new JsonResponse([
-        'idReceipe' => $idReceipe,
-        'note' => $note,
-        'message' => $message,
-        'status' => 'OK'
+        'message' => 'Merci, la note est enregistrée.',
+        'status' => true
       ]);
+    }
+    catch (Exception $e) {
+      // dd($e->getMessage());
+      return new JsonResponse([
+        'message' => 'Un problème est survenu',
+        'status' => false
+      ]);
+    }
   }
 }
 

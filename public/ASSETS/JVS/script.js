@@ -28,6 +28,13 @@ const url="https://127.0.0.1:8000/note/"
 const sendButton = document.querySelector("#send")
 const adrNote = document.querySelector("#note")
 const adrMess = document.querySelector("#message")
+// const myData = document.querySelector("#myData")
+
+// document.addEventListener('DOMContentLoaded', function() {
+//   // get receipe details
+//   receipe = JSON.parse(myData.dataset.receipe)
+// })
+
 
 sendButton.addEventListener('click', (e) => {
   console.log('click')
@@ -37,6 +44,7 @@ console.log (adrMess.value)
 
   let data = JSON.stringify({
     idReceipe: idReceipe,
+    // receipe: receipe,
     note: valNote,
     message: adrMess.value
   })
@@ -53,7 +61,7 @@ fetch(request)
 
 // RETURN DATA IS OK
 .then(response => {
-  console.log(response.idReceipe + " note: " + response.note + " " + response.message)
+  console.log(response.status + " " + response.message)
 })
 
 //IF ERROR
