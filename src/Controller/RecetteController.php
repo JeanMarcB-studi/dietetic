@@ -18,13 +18,13 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 class RecetteController extends AbstractController
 {
     #[Route('/recettes', name: 'app_recettes')]
-    public function index(RecetteRepository $RecetteRepository,request $request): Response
+    public function index(RecetteRepository $RecetteRepository,request $request, NoteRepository $NoteRepository): Response
     {
         return $this->render('pages/liste_recettes.html.twig', [
             'regimes' => $this->lstRegime(),
             'allergenes' => $this->lstAllergene(),
-            'lstRecettes' => $this->lstRecettes($RecetteRepository),
-            'lstNotes' => $RecetteRepository->queryNotes(),
+            'lstRecettes' => $this->lstRecettes($RecetteRepository, $NoteRepository),
+            'lstNotes' => $NoteRepository->queryLstNotes(),
         ]);
     }
 
@@ -64,7 +64,7 @@ class RecetteController extends AbstractController
         return($allergene);
     }
 
-    private function lstRecettes(RecetteRepository $repo): array
+    private function lstRecettes(RecetteRepository $repo, NoteRepository $NoteRepository): array
     {
         $recettes = array();
 
@@ -72,10 +72,31 @@ class RecetteController extends AbstractController
         $user = $this->getUser();
 
         //IF USER IS CONNECTED
-        if ($user)
+        if ($user){
+
             $recettes = $repo->queryOkRegime($user->getId());
+            $notes = $NoteRepository->queryLstNotes();
+            
+            dump($notes);
+
+            $nb = 0;
+            foreach($recettes as $recette){
+                $recettes[$nb]['note'] = 4;
+                $nb++;
+            }
+            
+            
+            
+            dd($recettes);
+        }
             return($recettes);
     } 
+
+    // private function lstNotesMoyennes(RecetteRepository $repo): array
+    // {
+    //     $lst = array();
+
+    // }
 
 
     //..... MANAGE THE RECEIPE SHOWING IN DETAIL .........................

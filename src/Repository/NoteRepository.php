@@ -39,6 +39,30 @@ class NoteRepository extends ServiceEntityRepository
         }
     }
 
+    public function queryLstNotes(): array
+    {
+        $conn = $this->getEntityManager()->getConnection();
+    
+        $sql = '
+            SELECT  
+            recette_id,
+            COUNT(note) AS nbnote,
+            ROUND(AVG(note), 1) AS moynote
+            FROM Note
+            GROUP BY 1
+            ORDER BY 1 ASC
+            ';
+
+        $stmt = $conn->prepare($sql);
+        $resultSet = $stmt->executeQuery();
+    
+        // returns an array of arrays (i.e. a raw data set)
+        return $resultSet->fetchAllAssociative();
+    }
+
+
+
+
 //    /**
 //     * @return Note[] Returns an array of Note objects
 //     */
