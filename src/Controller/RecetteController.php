@@ -78,90 +78,89 @@ class RecetteController extends AbstractController
     } 
 
 
+    //..... MANAGE THE RECEIPE SHOWING IN DETAIL .........................
+
     #[Route('/recette/{id}', name: 'app_detail_recette', requirements:['id' => '\d+'])]
     public function detail(
         RecetteRepository $RecetteRepository,
         request $request,
+        NoteRepository $NoteRepository,
         EntityManagerInterface $entityManager
         ): Response
     {
-
         // dump($request);
 
         $idRecette = $request->attributes->get('id');
-        $recette = ($RecetteRepository->find($idRecette));
+        $recette = $RecetteRepository->find($idRecette);
+
+        // look if user already made a note on this receipe
+        $user = $this->getUser()->getID();
+
+        $note = $NoteRepository->findBy(
+            array('recette' => $idRecette, 'user' => $user),null,1,0
+        );
 
         $recette->getRegime()->initialize();
         $recette->getAllergene()->initialize();
-        // $allergenes = $recette->getAllergene()->getValues();
-       
-        // $form = $this->createForm(NoteType::class, $note);
-        // $form->handleRequest($request);        
-        // if ($form->isSubmitted()){
-        //     // if ($form->isSubmitted() && $form->isValid()){
-        //         dd($form);
-        // }
 
         return $this->render('pages/detail_recette.html.twig', [
             'recette' => $recette,
             'idRecette' => $idRecette,
-            // 'idUser' => $idUser,           
-
-            // 'form' => $form->createView(),
+            'notes' => $note
         ]);
     }
 
     // #[Route('/note/{idRecette}{note}{message}', 
-    #[Route('/note2/{idRecette}{note}', 
-        name: 'app_note_recette', 
-        // requirements:['idRecette' => '\d+', 'note' => '\d+'],
-        methods: ['GET'])]
+//     #[Route('/note2/{idRecette}{note}', 
+//         name: 'app_note_recette', 
+//         // requirements:['idRecette' => '\d+', 'note' => '\d+'],
+//         methods: ['GET'])]
 
-    public function createNote(
-        RecetteRepository $RecetteRepository,
-        request $request,
-        EntityManagerInterface $entityManager
-        ): JsonResponse
-    {
-// dd($request->attributes);
-dd($request);
-        $idRecette = $request->attributes->get('idRecette');
-        // dump($idRecette);
-        // $req = $request->request;
-        // $message = trim($req->get('message'));
-        // $noteVal = (int)$req->get('note');
-        // $today = new \DateTime();
-        // $user = $this->getUser();
-        // $idUser = $user->getId();
+//     public function createNote(
+//         RecetteRepository $RecetteRepository,
+//         request $request,
+//         EntityManagerInterface $entityManager
+//         ): JsonResponse
+//     {
+// // dd($request->attributes);
+// dd($request);
+//         $idRecette = $request->attributes->get('idRecette');
+//         // dump($idRecette);
+//         // $req = $request->request;
+//         // $message = trim($req->get('message'));
+//         // $noteVal = (int)$req->get('note');
+//         // $today = new \DateTime();
+//         // $user = $this->getUser();
+//         // $idUser = $user->getId();
         
-        // $note = new Note();
-        // $note->setAvis($message);
-        // $note->setNote($noteVal);
-        // $note->setDateAvis($today);
-        // $note->setRecette($idRecette);
-        // $note->setUser($idUser);
+//         // $note = new Note();
+//         // $note->setAvis($message);
+//         // $note->setNote($noteVal);
+//         // $note->setDateAvis($today);
+//         // $note->setRecette($idRecette);
+//         // $note->setUser($idUser);
         
 
-        // $entityManager->persist($note);
-        // $entityManager->flush();
+//         // $entityManager->persist($note);
+//         // $entityManager->flush();
 
-        return new JsonResponse([
-            'message' => 'Note enregistrée '.$idRecette,
-            'path' => 'src/Controller/RecetteController.php',
-        ]);
-    }
+//         return new JsonResponse([
+//             'message' => 'Note enregistrée '.$idRecette,
+//             'path' => 'src/Controller/RecetteController.php',
+//         ]);
+//     }
 
 
-    // #[Route('/api/createnote/{idRecette}', name: 'app_createnote', methods: ['POST'])]
+    // // #[Route('/api/createnote/{idRecette}', name: 'app_createnote', methods: ['POST'])]
 
-    #[Route('/api/createnote/{id}', name: 'app_createnote', methods: ['POST'])]
-    public function addNote(int $idRecette): JsonResponse
-    {
+    // #[Route('/api/createnote/{id}', name: 'app_createnote', methods: ['POST'])]
+    // public function addNote(int $idRecette): JsonResponse
+    // {
 
-        return new JsonResponse([
-            'message' => 'welcome to your new controller!',
-        ]);
-    }
+    //     return new JsonResponse([
+    //         'message' => 'welcome to your new controller!',
+    //     ]);
+    // }
 
 
 

@@ -7,6 +7,21 @@
 <!-- myCSS -->
 <link rel="stylesheet" href="{{ asset('ASSETS/CSS/style_recettes.css') }}">
 
+
+{# PREPARE NOTE RETRIEVAL IF EXISTS FOR THIS RECEIPE #}
+{% set noteval = 0 %}
+{% set message = '' %}
+{% set datemsg = '' %}
+
+
+{% for note in notes %}
+    {% set noteval = note.note %}
+    {% set message = note.avis %}
+    {% set datemsg = note.dateavis %}
+{% endfor %}
+
+
+{# SHOW THE RECEIPE #}
 <div class="p-1 p-sm-5">
 
     <div class="col-12 roundApricot py-2">
@@ -103,14 +118,22 @@
 
 
 
-<form class="container-fluid py-3">
+<div class="container-fluid py-3">
     <div class="row max-500 mx-auto">
+
+        {# ID RECEIPE #}
         <div id="numReceipe" class="d-none">
             {{ idRecette }}
         </div>
-        {# Note #}
+
+        {# NOTE SELECTION #}
         <div class="col-12">
-            <label for="note" class="form-label">Pour noter cette recette :</label>
+            {% if noteval == 0 %}
+                <label for="note" class="form-label">Pour noter cette recette :</label>
+            {% else %}
+                <label for="note" class="form-label">Le {{ datemsg|date('d-m-Y') }}, vous avez noté cette recette :</label>                
+            {% endif %}
+        
             <div class="input-group flex-nowrap">
                 <span class="input-group-text text-center align-middle text-danger" id="a1"><i class="bi bi-clipboard-heart align-middle mb-1"></i></span>
                 <div class="border w-100 text-center border-2 rounded-end myApricotBG pb-0">
@@ -128,23 +151,33 @@
 
         </div>
 
-
-        {# Message input #}
+        {# MESSAGE INPUT #}
         <div class="col-12 mt-3">
             <div class="form-outline mb-1 p-1">
-                <label for="message" class="form-label">Un commentaire ?</label>
-                <textarea class="form-control py-0 lh-1 mb-3" id="message" name="message" rows="3"  placeholder="Avez vous un commentaire à faire sur cette recette ?"></textarea>
+                {% if noteval == 0 %}
+                    <label for="message" class="form-label">Un commentaire ?</label>
+                    <textarea class="form-control py-0 lh-1 mb-3" id="message" name="message" rows="3"  placeholder="Avez vous un commentaire à faire sur cette recette ?">{{ message }}</textarea>
+                {% else %}
+                    <label for="message" class="form-label">Vous avez commenté :</label>
+                    <textarea class="form-control py-0 lh-1 mb-3" id="message" name="message" rows="3" readonly>{{ message }}</textarea>
+                {% endif %}
+            
             </div>
         </div>
-        <div class="text-center">
-            <button class="col-4 btn btn-secondary" type="button" id="send">ENVOI</button>
-        </div>
+
+        {# BUTTON #}
+        {% if noteval == 0 %}
+            <div class="text-center">
+                <button class="col-4 btn btn-secondary" type="button" id="send">ENVOI</button>
+            </div>
+        {# {% else %} #}
+        {% endif %}
     </div>
-  </div>
+</div>
 
 
 <div id="myData" 
-    data-receipe="{{ recette|serialize(format = 'json') }}";>
+    data-note="{{ noteval }}">
 </div>
 
 

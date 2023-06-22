@@ -54,20 +54,18 @@ class NoteController extends AbstractController
 
       try {
 
-        // PREPARE RECORDING
-        $note = new Note();
-        $today = new \DateTime();
-        $note->setAvis($message);
-        $note->setNote($noteVal);
-        $note->setDateAvis($today);
+      // PREPARE RECORDING
+      $note = new Note();
+      $today = new \DateTime();
+      $note->setAvis($message);
+      $note->setNote($noteVal);
+      $note->setDateAvis($today);
       $note->setRecette($receipe);
       $note->setUser($user);
-      
-      dump($note);
-      dump($request);
 
       // SAVE THE NOTE
       $NoteRepository->save($note, true);
+      // $receipe->addNote($note);
 
       return new JsonResponse([
         'message' => 'Merci, la note est enregistrée.',
