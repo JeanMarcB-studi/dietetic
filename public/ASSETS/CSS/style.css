@@ -80,7 +80,6 @@ h2{
   box-shadow: 0 10px 10px rgba(0, 0, 0, 0.7) ;
   /* border-bottom-left-radius: 5px; */
   border-bottom-right-radius: 50px;
-
 }
 
 .roundApricot{
@@ -100,14 +99,14 @@ h2{
 }
 
 .borderJade{
-  border: 4px solid var(--colorJade);
+  border: 3px solid var(--colorJade);
 }
 .borderJadeTop{
-  border: 4px solid var(--colorJade);
+  border: 3px solid var(--colorJade);
   border-bottom: 0;  
 }
 .borderJadeBottom{
-  border: 4px solid var(--colorJade);
+  border: 3px solid var(--colorJade);
   border-top: 0;
 }
 .borderApricot{
@@ -125,12 +124,12 @@ h2{
   box-shadow: 0 -3px 3px rgb(132, 83, 15, 0.4);
 }
 
-.positUp{
+.upperView{
   position: relative;
-  top: -40px;
-  color: white;
-  text-shadow: 2px 2px 6px #00a878;
+  top: -85px;
+  /* text-shadow: 0 4px 4px 4px black; */
 }
+
 
 .block-100{
   display: block;
@@ -151,7 +150,9 @@ h2{
   max-width: 1400px;
 }
 
-
+.hidden{
+  display: none;
+}
 /*
 .arab1{
   width: 45vw;
@@ -192,7 +193,7 @@ h2{
   box-shadow: inset 0 0.5em 1.5em rgba(0, 0, 0, .1), inset 0 0.125em 0.5em rgba(0, 0, 0, .15),0 0.125em 0.5em rgba(0, 0, 0, .55);
   text-decoration: none;
   cursor: pointer;
-  transition: color 500ms ease-in-out, border-color 300ms ease-in-out, transform 200ms ease-in-out ;
+  transition: color 800ms ease-in-out, border-color 300ms ease-in-out, transform 200ms ease-in-out, background-color 1400ms ;
 }
 .btonContact:hover{
   box-shadow: inset 0 0em 1.5em rgba(35, 232, 97, 0.9), 0 0.125em 0.5em rgba(149, 238, 6, 0.95);

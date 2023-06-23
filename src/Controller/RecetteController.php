@@ -70,10 +70,12 @@ class RecetteController extends AbstractController
 
         //RECUPERER LE USER CONNECTE
         $user = $this->getUser();
-
+// dd($user);
         //IF USER IS CONNECTED
-        if ($user){            
+        if ($user && $user->isEstClient()){            
             $recettes = $repo->queryOkRegime($user->getId());
+        } else {
+            $recettes = $repo->queryVisitorReceipes();
         }
 
         $notes = $NoteRepository->queryLstNotes();
@@ -117,28 +119,32 @@ class RecetteController extends AbstractController
 
         $idRecette = $request->attributes->get('id');
         $recette = $RecetteRepository->find($idRecette);
+        $note = array();
 
-        // look if user already made a note on this receipe
-        $user = $this->getUser()->getID();
+        if ($this->getUser()){
 
-        $note = $NoteRepository->findBy(
-            array('recette' => $idRecette, 'user' => $user),null,1,0
-        );
-
-        $recette->getRegime()->initialize();
-        $recette->getAllergene()->initialize();
-
-        return $this->render('pages/detail_recette.html.twig', [
-            'recette' => $recette,
-            'idRecette' => $idRecette,
-            'notes' => $note
-        ]);
-    }
-
-    // #[Route('/note/{idRecette}{note}{message}', 
-//     #[Route('/note2/{idRecette}{note}', 
-//         name: 'app_note_recette', 
-//         // requirements:['idRecette' => '\d+', 'note' => '\d+'],
+            // look if user already made a note on this receipe
+            $user = $this->getUser()->getID();
+            
+            $note = $NoteRepository->findBy(
+                array('recette' => $idRecette, 'user' => $user),null,1,0
+            );
+            
+            $recette->getRegime()->initialize();
+            $recette->getAllergene()->initialize();
+            
+        }
+            return $this->render('pages/detail_recette.html.twig', [
+                'recette' => $recette,
+                'idRecette' => $idRecette,
+                'notes' => $note
+            ]);
+        }
+        
+        // #[Route('/note/{idRecette}{note}{message}', 
+        //     #[Route('/note2/{idRecette}{note}', 
+        //         name: 'app_note_recette', 
+        //         // requirements:['idRecette' => '\d+', 'note' => '\d+'],
 //         methods: ['GET'])]
 
 //     public function createNote(

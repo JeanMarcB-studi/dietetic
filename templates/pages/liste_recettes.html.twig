@@ -42,7 +42,7 @@
             <article class="container-fluid mx-auto myWidth my-0 mt-0 px-4 pb-0 pt-4 roundApricot borderJadeTop">
                 <div class="row ">
                     <div class="col ">
-                        <h2 class="  text-end text-sm-center">
+                        <h2 class="text-end text-sm-center">
                             Bonjour {{ app.user.prenom|capitalize }}, 
                         </h2>
                         <div class="myJade px-4 text-justify">
@@ -75,7 +75,7 @@
 
                     <div  class = "col-12 col-sm-6">
                         <p class="text-center mb-0 text-white">
-                            Vos allergies :
+                            Vos allergies connues :
                         </p>
                         <ul class = "px-sm-5 mb-0">
                             {% if (allergenes|length == 0) %}
@@ -110,13 +110,10 @@
         {% for recette in lstRecettes %}
 
             {# SHOW 1 RECEIPE #}
-            <div class="col-12 col-lg-6 col-xl-4 text-center my-2 p-3"
+            <div class="col-12 col-lg-6 col-xl-4 text-center my-2 p-3" >
                 {# prepare link if click #}
-                href="{{ path('app_detail_recette',{'id': recette.id}) }}">
             
-                <div type="button" class="recette p-2 mx-auto h-100 card">
-
- {# <img src="{{ asset('ASSETS/IMG/img8.jpg') }}" class="myImages mealPic" alt="photo tomates" srcset=""> #}
+                <a type="button" class="recette p-2 mx-auto h-100 card" href="{{ path('app_detail_recette',{'id': recette.id}) }}">
 
                     <img src="{{ asset('ASSETS/IMG/img10b.jpg') }}" alt="Photo nourriture" class="rounded" >
                     
@@ -126,7 +123,7 @@
                     </h2>
 
                     {# <img src="{{ asset('ASSETS/IMG/arab2.png') }}" class="arab1 mb-3" alt="" srcset=""> #}
-                    <div class="">
+                    <div class="text-secondary">
                         {{ recette.description|capitalize }} {# ex: cette tarte croustillante en 30 minutes #}
                     </div>
                     </div>
@@ -140,12 +137,14 @@
                             {% endfor %}
                         {% endif %}
 
-                        ({{ recette.nbNotes }} vote{% if recette.nbNotes > 1 %}s{% endif %}
-                        )
+                        <span class="text-secondary">
+                            ({{ recette.nbNotes }} vote{% if recette.nbNotes > 1 %}s{% endif %})
+                        </span>
+
                     </div>
 
 
-                </div>
+                </a>
 
             </div>
 

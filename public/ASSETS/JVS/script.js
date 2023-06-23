@@ -6,10 +6,16 @@ const idReceipe = parseInt(document.querySelector("#numReceipe").textContent)
 const url="https://127.0.0.1:8000/note/"
 const adrNote = document.querySelector("#note")
 const adrMess = document.querySelector("#message")
+const adrErr  = document.querySelector("#msgErr")
 const adrStars = document.querySelectorAll(".star")
 
 const myData = document.querySelector("#myData")
 let sendButton
+
+function handleClick() {
+  sendNote();
+}
+
 
 document.addEventListener('DOMContentLoaded', function() {
   //  notenote = JSON.parse(myData.dataset.receipe)
@@ -20,9 +26,7 @@ document.addEventListener('DOMContentLoaded', function() {
     // NO NOTE HAVE BEEN CREATED BY THE USER
     starsPrepare()
     sendButton = document.querySelector("#send")
-    sendButton.addEventListener('click', (e) => {
-      sendNote()
-    })
+    sendButton.addEventListener('click', handleClick)
   }
   else
   {
@@ -40,6 +44,9 @@ document.addEventListener('DOMContentLoaded', function() {
 // })
 
 let sendNote = () => {
+  //Suppress the button action
+  sendButton.classList.add("hidden")
+  sendButton.removeEventListener('click', handleClick)
   console.log('click ENVOI')
   
   let data = JSON.stringify({
@@ -56,12 +63,23 @@ let sendNote = () => {
     headers: new Headers()
   });
 
-fetch(request)
-.then(response => response.json())
+  fetch(request)
+  .then(response => response.json())
 
-// RETURN DATA IS OK
-.then(response => {
-  console.log(response.status + " " + response.message)
+  // RETURN DATA IS OK?
+  .then(response => {
+    console.log(response.status + " " + response.message)
+    if (response.status != false){
+      
+      // It's OK
+      adrErr.textContent = "Note enregistrée : merci !"
+    } else {
+
+      // We've got an error
+      adrErr.textContent = response.message
+      sendButton.addEventListener('click', handleClick)
+      sendButton.classList.remove("hidden")
+    } 
 })
 
 //IF ERROR

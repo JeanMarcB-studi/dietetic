@@ -78,6 +78,25 @@ class RecetteRepository extends ServiceEntityRepository
         return $resultSet->fetchAllAssociative();
     }
 
+    public function queryVisitorReceipes(): array
+    {
+        $conn = $this->getEntityManager()->getConnection();
+    
+        $sql = "
+        SELECT *
+        FROM recette
+        WHERE Visible_Tous = true
+        ORDER BY titre ASC
+            ";
+
+        $stmt = $conn->prepare($sql);
+        $resultSet = $stmt->executeQuery();
+
+        // returns an array of arrays (i.e. a raw data set)
+        // dd($resultSet->fetchAllAssociative());
+        return $resultSet->fetchAllAssociative();
+    }
+
     public function queryNotes(): array
     {
         $conn = $this->getEntityManager()->getConnection();
