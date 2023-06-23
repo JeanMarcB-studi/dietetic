@@ -123,10 +123,27 @@
                     <h2 class="mb-0 px-0 recetteTitre">
                         {{ recette.titre|capitalize }} {# ex: tarte aux framboises #}
                     </h2>
+
                     {# <img src="{{ asset('ASSETS/IMG/arab2.png') }}" class="arab1 mb-3" alt="" srcset=""> #}
                     <div class="">
                         {{ recette.description|capitalize }} {# ex: cette tarte croustillante en 30 minutes #}
                     </div>
+
+                    <div class="border">
+                        {# {% if (recette.nbNotes != 0) %} #}
+                        
+                            {% set avg = recette.avgNotes|round %}
+                            {# {{ avg }} #}
+                            {% if avg > 0 %}
+                                {% for i in 1..avg %}
+                                    <i class="bi bi-star-fill "></i>
+                                {% endfor %}
+                            {% endif %}
+
+                            ({{ recette.nbNotes }} votes)
+                        {# {% endif %} #}                        
+                    </div>
+
 
                 </button>
 

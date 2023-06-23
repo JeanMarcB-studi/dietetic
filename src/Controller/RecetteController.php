@@ -72,32 +72,36 @@ class RecetteController extends AbstractController
         $user = $this->getUser();
 
         //IF USER IS CONNECTED
-        if ($user){
-
+        if ($user){            
             $recettes = $repo->queryOkRegime($user->getId());
-            $notes = $NoteRepository->queryLstNotes();
-            
-            dump($notes);
-
-            $nb = 0;
-            foreach($recettes as $recette){
-                $recettes[$nb]['note'] = 4;
-                $nb++;
-            }
-            
-            
-            
-            dd($recettes);
         }
-            return($recettes);
+
+        $notes = $NoteRepository->queryLstNotes();
+        
+        dump($notes);
+        //ADD NOTE INFORMATION ON RECEIPES
+        $nb = 0;
+        foreach($recettes as $recette){
+            $id = $recettes[$nb]['id'];
+            $nbNotes = 0;
+            $avgNotes = 0;
+
+            //search if noes exist for this receipe:
+            foreach($notes as $note){
+                if ($note['recette_id'] === $id){
+                    $nbNotes = $note['nbnote'];
+                    $avgNotes = $note['moynote'];
+                    break;
+                }
+            }
+            $recettes[$nb]['avgNotes'] = $avgNotes;
+            $recettes[$nb]['nbNotes'] = $nbNotes;
+
+            $nb++;
+        }
+        
+        return($recettes);
     } 
-
-    // private function lstNotesMoyennes(RecetteRepository $repo): array
-    // {
-    //     $lst = array();
-
-    // }
-
 
     //..... MANAGE THE RECEIPE SHOWING IN DETAIL .........................
 
