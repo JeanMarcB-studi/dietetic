@@ -127,7 +127,9 @@ h2{
 
 .positUp{
   position: relative;
-  top: -80px;
+  top: -40px;
+  color: white;
+  text-shadow: 2px 2px 6px #00a878;
 }
 
 .block-100{

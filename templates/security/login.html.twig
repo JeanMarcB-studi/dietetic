@@ -23,53 +23,61 @@
                             <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
                         {% endif %}
 
+                    </div>
                         {% if app.user %}
-                            <div class="mb-3">
-                                Vous êtes déjà connecté : {{ app.user.userIdentifier }},
-                                <a href="{{ path('app_logout') }}" class="nav-link"><span class="text-info"> Se déconnecter</span></a>
+
+                            {# IF USER IS CONNECTED PROPOSE ONLY DISCONNECT #}
+                            <div class="col-12">
+                                <div class="mb-3">
+                                    Vous êtes déjà connecté : {{ app.user.userIdentifier }},
+                                    <a href="{{ path('app_logout') }}" class="nav-link"><span class="text-info"> Se déconnecter</span></a>
+                                </div>
                             </div>
+
+                        {% else %}
+
+                            {# IF USER IS NOT CONNECTED #}
+                            <div class="col-12">
+                                <h2 class="mb-3">Veuillez entrer vos identifiants : </h2>
+                            
+                                <label for="inputEmail"  class="form-label">Email :</label>
+                                <input type="email" value="{{ last_username }}" name="email" id="inputEmail" class="form-control" autocomplete="email" required autofocus>
+                            </div>
+                        
+                            <div class="col-12">
+                                <label for="inputPassword" class="form-label mt-3">Mot de passe :</label>
+                                <input type="password" name="password" id="inputPassword" class="form-control" autocomplete="current-password" required>
+
+                                <input type="hidden" name="_csrf_token"
+                                    value="{{ csrf_token('authenticate') }}"
+                                >
+                            </div>
+
+                            <div class="col-12 w-100">
+                                <button class="btn btn-outline-info btn-lg my-4 w-100" type="submit">
+                                    Connexion
+                                </button>
+                            </div>
+
                         {% endif %}
-
-                    </div>
-
-                    <div class="col-12">
-                        <h2 class="mb-3">Veuillez entrer vos identifiants : </h2>
-                    
-                        <label for="inputEmail"  class="form-label">Email :</label>
-                        <input type="email" value="{{ last_username }}" name="email" id="inputEmail" class="form-control" autocomplete="email" required autofocus>
-                    </div>
-                
-                    <div class="col-12">
-                        <label for="inputPassword" class="form-label mt-3">Mot de passe :</label>
-                        <input type="password" name="password" id="inputPassword" class="form-control" autocomplete="current-password" required>
-
-                        <input type="hidden" name="_csrf_token"
-                            value="{{ csrf_token('authenticate') }}"
-                        >
-                    </div>
-
-                    <div class="col-12 w-100">
-                        <button class="btn btn-outline-info btn-lg my-4 w-100" type="submit">
-                            Connexion
-                        </button>
-                    </div>
-
                 </div>   
             </form>
         </div>
     </article>
 </div>
 
-
-<div class="container-sm myWidth mx-auto">
-    <div class="row px-2">
-        <div class="col">
-            <a class="nav-link mx-auto my-3" href="{{ path('app_register') }}">
-            Nouveau sur le site ? <span class="text-info">S'inscrire</span>
-            </a>
+{# IF USER NOT CONNECTED PROPOSE TO REGISTER #}
+{% if not(app.user) %}
+    <div class="container-sm myWidth mx-auto">
+        <div class="row px-2">
+            <div class="col">
+                <a class="nav-link mx-auto my-3" href="{{ path('app_register') }}">
+                Nouveau sur le site ? <span class="text-info">S'inscrire</span>
+                </a>
+            </div>
         </div>
     </div>
-</div>
+{% endif %}
 
 </div>
 
