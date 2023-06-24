@@ -7,6 +7,8 @@ const url="https://127.0.0.1:8000/note/"
 const adrNote = document.querySelector("#note")
 const adrMess = document.querySelector("#message")
 const adrErr  = document.querySelector("#msgErr")
+const adrIngr = document.querySelector("#ingredients")
+const adrPrep = document.querySelector("#preparation")
 const adrStars = document.querySelectorAll(".star")
 
 const myData = document.querySelector("#myData")
@@ -21,6 +23,24 @@ document.addEventListener('DOMContentLoaded', function() {
   //  notenote = JSON.parse(myData.dataset.receipe)
   valNote = myData.dataset.note
   console.log("note: "+valNote)
+
+  ingredients = JSON.parse(myData.dataset.ingredients)
+  details = ingredients.split("\r\n")
+  for (elt of details){
+    let li = document.createElement('li') 
+    li.append(elt.trim())
+    adrIngr.append(li)    
+  }
+  
+  preparation = JSON.parse(myData.dataset.preparation)
+  details = preparation.split("\r\n")
+  for (elt of details){
+    let li = document.createElement('li') 
+    li.append(elt.trim())
+    adrPrep.append(li)    
+  }
+
+
   
   if (valNote == 0){
     // NO NOTE HAVE BEEN CREATED BY THE USER
