@@ -60,6 +60,24 @@ class NoteRepository extends ServiceEntityRepository
         return $resultSet->fetchAllAssociative();
     }
 
+    public function queryLstComment($recette_Id): array
+    {
+        $conn = $this->getEntityManager()->getConnection();
+    
+        $sql = "
+            SELECT *
+            FROM Note
+            WHERE recette_id = $recette_Id
+            ORDER BY date_avis DESC
+            ";
+
+        $stmt = $conn->prepare($sql);
+        $resultSet = $stmt->executeQuery();
+    
+        // returns an array of arrays (i.e. a raw data set)
+        return $resultSet->fetchAllAssociative();
+    }
+
 
 
 

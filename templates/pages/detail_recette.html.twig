@@ -37,31 +37,34 @@
 <article class="container-fluid borderApricot py-3 rounded-bottom">
     <div class="row max-1800 mx-auto">
 
-        {# Show times to prepare this receipe #}
+        {# Show this receipe's decription #}
         <div class="col-12 col-lg-6">
             <div class="max-400 mx-auto mb-3">
                 <p class="">
                     {{ recette.description|capitalize }}
                 </p>
             </div>
-        </div>    
-        <div class="col-12 col-lg-6">
+        </div>
 
-            {% if (recette.tempsPreparation) %}
-                <div>
-                    Temps de préparation : {{ recette.tempsPreparation|date('H:i') }} heures
-                </div>
-            {% endif %}
-            {% if (recette.tempsPreparation) %}
-                <div>
-                    Temps de repos : {{ recette.tempsRepos|date('H:i') }} heures
-                </div>
-            {% endif %}
-            {% if (recette.tempsPreparation) %}
-                <div>
-                    Temps de cuisson : {{ recette.tempsCuisson|date('H:i') }} heures
-                </div>
-            {% endif %}
+        {# Show times to prepare this receipe #}
+        <div class="col-12 col-lg-6">
+            <div class="max-400 mx-auto mb-3">
+                {% if (recette.tempsPreparation) %}
+                    <div>
+                        Temps de préparation : {{ recette.tempsPreparation|date('H:i') }} heures
+                    </div>
+                {% endif %}
+                {% if (recette.tempsPreparation) %}
+                    <div>
+                        Temps de repos : {{ recette.tempsRepos|date('H:i') }} heures
+                    </div>
+                {% endif %}
+                {% if (recette.tempsPreparation) %}
+                    <div>
+                        Temps de cuisson : {{ recette.tempsCuisson|date('H:i') }} heures
+                    </div>
+                {% endif %}
+            </div>
         </div>
 
         {# Show list of Regimes for this receipe #}
@@ -74,7 +77,6 @@
         {# </div> #}
 
         {# Show list of allergenes for this receipe #}
-        {# <div class="col-12 text-center"> #}
             {% for allergene in recette.allergene.snapshot %}
                 <span class="regime bg-danger">
                     {{ allergene.nom }}
@@ -121,6 +123,7 @@
 </div>
 
 
+{# ..... MANAGE USER COMMENT .............................. #}
 
 <div class="container-fluid py-3">
     <div class="row max-500 mx-auto">
@@ -158,9 +161,6 @@
                 </div>
             </div>            
         </div>
-        <div class="col-12">
-
-        </div>
 
 
         {# MESSAGE INPUT #}
@@ -185,6 +185,34 @@
         {% endif %}
     </div>
 </div>
+
+
+{# ..... SHOW OTHER CUSTOMERS COMMENTS ...................... #}
+
+{% if (comments is not empty) %}
+    <div class="container-fluid py-3">
+        <div class="row max-500 mx-auto">
+                <div class="col-12 mb-2 myJade">
+                    Les avis de mes clients :
+                </div>
+                {% for comment in comments %}
+                    <div class="col-12 border py-2">
+                        <p>
+                            <span class="text-secondary me-3 small">{{ comment.date_avis|date('d-m-Y') }}</span>
+
+                            {% if comment.note > 0 %}                        
+                                {% for I in 1..comment.note %}
+                                    <i class="bi bi-star-fill myJade"></i>
+                                {% endfor %}
+                            {% endif %}
+
+                        </p>
+                        <p>{{ comment.avis }}</p>
+                    </div>
+                {% endfor %}
+        </div>
+    </div>
+{% endif %}
 
 
 <div id="myData" 
