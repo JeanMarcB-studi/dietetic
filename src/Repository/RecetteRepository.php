@@ -61,7 +61,7 @@ class RecetteRepository extends ServiceEntityRepository
 
             SELECT DISTINCT (recette_id) 
             FROM `recette_allergene`
-            WHERE allergene_id NOT IN (
+            WHERE allergene_id IN (
                     SELECT allergene_id 
                     FROM user_allergene
                     WHERE user_id = $user_id)
@@ -72,9 +72,9 @@ class RecetteRepository extends ServiceEntityRepository
 
         $stmt = $conn->prepare($sql);
         $resultSet = $stmt->executeQuery();
+        // dd($resultSet->fetchAllAssociative());
 
         // returns an array of arrays (i.e. a raw data set)
-        // dd($resultSet->fetchAllAssociative());
         return $resultSet->fetchAllAssociative();
     }
 

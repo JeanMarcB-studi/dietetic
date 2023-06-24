@@ -65,7 +65,7 @@
         </div>
 
         {# Show list of Regimes for this receipe #}
-        <div class="col-12 text-center">
+        <div class="col-12 text-center mt-3">
             {% for regime in recette.regime.snapshot %}
                 <span class="regime">
                     {{ regime.titre }}
@@ -77,14 +77,14 @@
         {# <div class="col-12 text-center"> #}
             {% for allergene in recette.allergene.snapshot %}
                 <span class="regime bg-danger">
-                    {{ allergene.titre }}
+                    {{ allergene.nom }}
                 </span>
             {% endfor %}
         </div>
 
 
     </div>
-    <div class="row max-1400 mx-auto mt-4">
+    <div class="row max-1400 mx-auto mt-3">
 
         <div class="col-12 col-lg-6 p-0 px-lg-4">
             <div class="borderJade rounded-4 p-1 p-lg-4 my-3">
@@ -92,7 +92,8 @@
                     Ingrédients :
                 </h3>
                 <div>
-                    {{ recette.ingredients|capitalize }}
+                    {# {{ recette.ingredients|capitalize }} #}
+                    {{ recette.ingredients|nl2br }}
                 </div>
             </div>
         </div>
@@ -103,7 +104,7 @@
                     Préparation :
                 </h3>
                 <div>
-                    {{ recette.preparation|capitalize }}
+                    {{ recette.preparation|nl2br }}
                 </div>
             </div>
         </div>
