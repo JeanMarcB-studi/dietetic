@@ -154,6 +154,10 @@ h2{
   display: none;
 }
 
+.logo{
+  width: 100px;
+}
+
 .btonContact{
   display: block;
   height: 50px;
