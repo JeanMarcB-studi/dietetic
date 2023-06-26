@@ -27,9 +27,14 @@
                         {% if app.user %}
 
                             {# IF USER IS CONNECTED PROPOSE ONLY DISCONNECT #}
+                            <div class="col-12 p-3">
+                                Bonjour {{ app.user.nom|capitalize }},
+                            </div>
                             <div class="col-12">
                                 <div class="mb-3">
-                                    Vous êtes déjà connecté : {{ app.user.userIdentifier }},
+                                    <p>
+                                    Vous êtes déjà connecté(e) : {{ app.user.userIdentifier }}
+                                    </p>
                                     <a href="{{ path('app_logout') }}" class="nav-link"><span class="text-info"> Se déconnecter</span></a>
                                 </div>
                             </div>

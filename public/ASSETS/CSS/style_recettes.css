@@ -7,10 +7,8 @@
 }
 
 .recette{
-  /* margin: 3px; */
   border: 3px solid var(--colorApricot);
   border-radius: 20px;
-  /* box-shadow: inset 0 0.5em 1.5em rgba(0, 0, 0, .1), inset 0 0.125em 0.5em rgba(0, 0, 0, .15); */
   box-shadow: inset 0 0.5em 1.5em rgba(255, 198, 172, 0.7), inset 0 0.125em 0.5em rgba(255, 198, 172, 0.15);
   max-width: 400px;
   min-height: 270px;
@@ -21,7 +19,6 @@
   transform:scale(1.05);
   border-bottom-right-radius: 60px;
   box-shadow: inset 0 0.5em 1.5em rgba(255, 198, 172, 0.7), inset -1em 1em 1em rgba(255, 198, 172, 0.15);
-  /* box-shadow: inset 0 0.5em 1.5em rgba(255, 198, 172, 0.7), inset 0 0.125em 0.5em rgba(255, 198, 172, 0.15); */
 }
 
 .recetteTitre{
@@ -52,24 +49,52 @@
   color: var(--colorJade);
 }
 
+.msg{
+  font-size: 1.2rem;
+}
+
+.upperView{
+  position: relative;
+  top: -100px;
+}
+
+.mealPic{
+  width: 530px;
+}
+
+.imgDeco {
+  background-image: url("/ASSETS/IMG/couverts.png");
+  background-repeat: no-repeat;
+  background-size: 40px;
+  background-position: 5% 40px;
+}
 
 /* RESPONSIVITY : WIDTH VALUES from 576px to 992px LARGE */
 @media (min-width: 576px){
 
-  .upperView{
-    position: relative;
-    top: -100px;
-  }
-
-  .mealPic{
-    width: 530px;
+  .imgDeco {
+  background-size: 60px;
+  background-position: 40px 20px;
   }
 }
 
 /* RESPONSIVITY : WIDTH VALUES MORE THAN 992px LARGE = 'LG'*/
 @media (min-width: 992px){
   
+  .imgDeco {
+  background-size: 100px;
+  background-position: 40px 10px;
+  }
+}
 
 
 
+
+
+.fiche {
+  background-color: rgb(229, 255, 192, 0.3);
+}
+.couverts {
+  max-width: 200px;
+  opacity: 50%;
 }

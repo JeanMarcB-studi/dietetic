@@ -48,5 +48,28 @@
         {# include my scripts #}
         <script src="{{ asset('ASSETS/JVS/script.js') }}"></script>
 
+
+        <footer>
+            <div class="text-center">
+                <p>
+                    Sandrine Coupart, 6 rue des salsifis, 14118 Caen
+                </p>
+
+                <p>
+                    Téléphone : <a title="téléphone" href="tel:+33601020304"><i class="bi bi-telephone myTel"></i></a>
+                    {# <div type="button" class="btn btn-outline-light"> #}
+
+                    - Email : <a title="email" href="mailto:sandrine.coupart@gmail.com"><i class="bi bi-envelope-at myMail"></i>
+                    </a>
+                    </div>
+                </p>
+            </div>
+            
+            <div class="text-center">
+                mentions légales : <a href="{{ asset('ASSETS/legal/mentions_legales.pdf') }}">télécharger</a>, 
+                politique de confidentialité : <a href="{{ asset('ASSETS/legal/confidentialite.pdf') }}">télécharger</a>
+            </div>
+        </footer>
+
     </body>
 </html>
