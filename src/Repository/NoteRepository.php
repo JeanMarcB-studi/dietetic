@@ -48,7 +48,7 @@ class NoteRepository extends ServiceEntityRepository
             recette_id,
             COUNT(note) AS nbnote,
             ROUND(AVG(note), 1) AS moynote
-            FROM Note
+            FROM note
             GROUP BY 1
             ORDER BY 1 ASC
             ';
@@ -66,7 +66,7 @@ class NoteRepository extends ServiceEntityRepository
     
         $sql = "
             SELECT *
-            FROM Note
+            FROM note
             WHERE recette_id = $recette_Id
             ORDER BY date_avis DESC
             ";
