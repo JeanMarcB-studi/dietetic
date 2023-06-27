@@ -2,21 +2,25 @@
 
 namespace App\Controller;
 
-use App\Entity\Note;
-use App\Entity\Recette;
-use App\Form\NoteType;
+// use App\Entity\Note;
+// use App\Entity\Recette;
+// use App\Form\NoteType;
 use App\Repository\NoteRepository;
 use App\Repository\RecetteRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Request;
-use Doctrine\ORM\EntityManagerInterface;
-use EasyCorp\Bundle\EasyAdminBundle\Field\AssociationField;
-use Symfony\Component\HttpFoundation\JsonResponse;
+// use Doctrine\ORM\EntityManagerInterface;
+// use EasyCorp\Bundle\EasyAdminBundle\Field\AssociationField;
+// use Symfony\Component\HttpFoundation\JsonResponse;
+
+
 
 class RecetteController extends AbstractController
 {
+
+    //..... MANAGE LIST OF RECEIPES
     #[Route('/recettes', name: 'app_recettes')]
     public function index(RecetteRepository $RecetteRepository,request $request, NoteRepository $NoteRepository): Response
     {
@@ -28,41 +32,41 @@ class RecetteController extends AbstractController
         ]);
     }
 
-    private function lstRegime(): array
-    {
-        $regimes = array();
+    // private function lstRegime(): array
+    // {
+    //     $regimes = array();
         
-        //RECUPERER LE USER CONNECTE
-        $user = $this->getUser();
+    //     //RECUPERER LE USER CONNECTE
+    //     $user = $this->getUser();
         
-        //IF USER IS CONNECTED
-        if ($user)
-        {
-            //$roles = $user->getRoles();
+    //     //IF USER IS CONNECTED
+    //     if ($user)
+    //     {
+    //         //$roles = $user->getRoles();
             
-            //INITIALISER PUIS RECUPERER LES REGIMES
-            $user->getRegime()->initialize();
-            $regimes = $user->getRegime()->getValues();
-        }
-        return($regimes);
-    }
+    //         //INITIALISER PUIS RECUPERER LES REGIMES
+    //         $user->getRegime()->initialize();
+    //         $regimes = $user->getRegime()->getValues();
+    //     }
+    //     return($regimes);
+    // }
 
-    private function lstAllergene(): array
-    {
-        $allergene = array();
+    // private function lstAllergene(): array
+    // {
+    //     $allergene = array();
         
-        //RECUPERER LE USER CONNECTE
-        $user = $this->getUser();
+    //     //RECUPERER LE USER CONNECTE
+    //     $user = $this->getUser();
         
-        //IF USER IS CONNECTED
-        if ($user)
-        {
-            //INITIALISER POUR RECUPERER LES REGIMES
-            $user->getAllergene()->initialize();
-            $allergene = $user->getAllergene()->getValues();
-        }
-        return($allergene);
-    }
+    //     //IF USER IS CONNECTED
+    //     if ($user)
+    //     {
+    //         //INITIALISER POUR RECUPERER LES REGIMES
+    //         $user->getAllergene()->initialize();
+    //         $allergene = $user->getAllergene()->getValues();
+    //     }
+    //     return($allergene);
+    // }
 
     private function lstRecettes(RecetteRepository $repo, NoteRepository $NoteRepository): array
     {
@@ -76,12 +80,15 @@ class RecetteController extends AbstractController
             $user->getAllergene()->initialize();
             $user->getRegime()->initialize();
             $regimes = $user->getRegime()->getValues();
+
             if (count($regimes) > 0) {
+                // The user has some regimes
                 $recettes = $repo->queryOkRegime($user->getId());
+            
             } else {
+                // No regime for this user, some allergies possible
                 $recettes = $repo->queryOkAllergene($user->getId());
             }
-
 
         } else {
             $recettes = $repo->queryVisitorReceipes();
@@ -140,6 +147,14 @@ class RecetteController extends AbstractController
             
             $recette->getRegime()->initialize();
             $recette->getAllergene()->initialize();
+
+            // GET CORRESPONDING CREDENTIALS TO LOCAL OR IN LINE
+            // if($_SERVER['SERVER_NAME'] === 'localhost')
+            // {
+            // require_once "db_test_id_local.php";  
+            // } else {  
+            // require_once "db_test_id_prod.php";
+            // }
             
         }
             return $this->render('pages/detail_recette.html.twig', [

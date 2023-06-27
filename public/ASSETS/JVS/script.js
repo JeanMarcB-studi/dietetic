@@ -3,7 +3,9 @@ console.log("start engine")
 
 const idReceipe = parseInt(document.querySelector("#numReceipe").textContent)
 
-const url="https://127.0.0.1:8000/note/"
+// const url="https://127.0.0.1:8000/note/"
+const url="/note/"
+
 const adrNote = document.querySelector("#note")
 const adrMess = document.querySelector("#message")
 const adrErr  = document.querySelector("#msgErr")
