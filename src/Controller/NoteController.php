@@ -22,6 +22,11 @@ class NoteController extends AbstractController
   public function number(request $request, NoteRepository $NoteRepository, RecetteRepository $RecetteRepository): JsonResponse
   {
 
+      // CORS HEADERS MANDATORY FOR JAVASCRIPT FETCH METHOD!
+      header('Access-Control-Allow-Origin: https://diete.piramida.fr');
+      // header('Access-Control-Allow-Methods: GET, POST, DELETE, PUT');
+      // header("Access-Control-Allow-Headers: X-Requested-With");
+
       $data = json_decode($request->getContent(), true);
       
       $idReceipe = (int)$data['idReceipe'];
