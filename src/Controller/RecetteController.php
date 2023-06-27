@@ -21,8 +21,8 @@ class RecetteController extends AbstractController
     public function index(RecetteRepository $RecetteRepository,request $request, NoteRepository $NoteRepository): Response
     {
         return $this->render('pages/liste_recettes.html.twig', [
-            'regimes' => $this->lstRegime(),
-            'allergenes' => $this->lstAllergene(),
+            // 'regimes' => $this->lstRegime(),
+            // 'allergenes' => $this->lstAllergene(),
             'lstRecettes' => $this->lstRecettes($RecetteRepository, $NoteRepository),
             'lstNotes' => $NoteRepository->queryLstNotes(),
         ]);
@@ -71,16 +71,24 @@ class RecetteController extends AbstractController
         //RECUPERER LE USER CONNECTE
         $user = $this->getUser();
 
-        //IF USER IS CONNECTED
-        if ($user && $user->isEstClient()){            
-            $recettes = $repo->queryOkRegime($user->getId());
+        //IF USER IS CONNECTED AND IS CLIENT
+        if ($user && $user->isEstClient()){
+            $user->getAllergene()->initialize();
+            $user->getRegime()->initialize();
+            $regimes = $user->getRegime()->getValues();
+            if (count($regimes) > 0) {
+                $recettes = $repo->queryOkRegime($user->getId());
+            } else {
+                $recettes = $repo->queryOkAllergene($user->getId());
+            }
+
+
         } else {
             $recettes = $repo->queryVisitorReceipes();
         }
 
         $notes = $NoteRepository->queryLstNotes();
         
-        dump($notes);
         //ADD NOTE INFORMATION ON RECEIPES
         $nb = 0;
         foreach($recettes as $recette){
@@ -115,7 +123,6 @@ class RecetteController extends AbstractController
         request $request,
         ): Response
     {
-        // dump($request);
 
         $idRecette = $request->attributes->get('id');
         $recette = $RecetteRepository->find($idRecette);

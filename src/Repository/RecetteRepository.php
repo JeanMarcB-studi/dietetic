@@ -39,7 +39,8 @@ class RecetteRepository extends ServiceEntityRepository
         }
     }
 
-    // public function queryOkRegime(lstIdRegimes): array
+    // GET ALL RECEIPES CORRESPONDING TO ONE OF THE REGIMES, 
+    // BUT WITH NO ALLERGENE RD THIS USER
     public function queryOkRegime(int $user_id): array
     {
         $conn = $this->getEntityManager()->getConnection();
@@ -78,6 +79,37 @@ class RecetteRepository extends ServiceEntityRepository
         return $resultSet->fetchAllAssociative();
     }
 
+    // GET ALL RECEIPES, 
+    // BUT WITH NO ALLERGENE RD THIS USER
+    public function queryOkAllergene(int $user_id): array
+    {
+        $conn = $this->getEntityManager()->getConnection();
+    
+        $sql = "
+        SELECT *
+        FROM recette
+        WHERE id not in
+        (
+            SELECT DISTINCT (recette_id) 
+            FROM `recette_allergene`
+            WHERE allergene_id IN (
+                SELECT allergene_id 
+                FROM user_allergene
+                WHERE user_id = $user_id)
+        )
+        ORDER BY titre ASC
+            ";
+
+        $stmt = $conn->prepare($sql);
+        $resultSet = $stmt->executeQuery();
+ 
+        // returns an array of arrays (i.e. a raw data set)
+        return $resultSet->fetchAllAssociative();
+    }
+
+
+    // GET ALL RECEIPES WHICH ARE PUBLIC
+    // NO CONTROL ON ALLERGENES OR REGIMES
     public function queryVisitorReceipes(): array
     {
         $conn = $this->getEntityManager()->getConnection();
@@ -97,6 +129,8 @@ class RecetteRepository extends ServiceEntityRepository
         return $resultSet->fetchAllAssociative();
     }
 
+
+    // RETRIEVE AVG NOTES
     public function queryNotes(): array
     {
         $conn = $this->getEntityManager()->getConnection();
@@ -112,8 +146,6 @@ class RecetteRepository extends ServiceEntityRepository
         $stmt = $conn->prepare($sql);
         $resultSet = $stmt->executeQuery();
 
-        // returns an array of arrays (i.e. a raw data set)
-        // dd($resultSet->fetchAllAssociative());
         return $resultSet->fetchAllAssociative();
     }
 

@@ -13,14 +13,6 @@
         <h1 class="col-12 text-center ">
             MES RECETTES
         </h1>
-{#     
-    <pre>
-        {{ dump(regimes) }}
-        {{ dump(allergenes) }}
-    </pre> #}
-{# <pre>
-    {{ dump(listenotes) }}
-</pre> #}
 
 
         <div class="myImages mealPic mx-auto">
@@ -59,12 +51,12 @@
                             Rappel, vos régimes :
                         </p>
                         <ul class = "px-sm-5 mb-0">
-                            {% if (regimes|length == 0) %}
+                            {% if (app.user.regime|length == 0) %}
                                 <li>
                                     Aucun régime prescrit.
                                 </li>
                             {% else %}
-                                {% for item in regimes %}
+                                {% for item in app.user.regime %}
                                     <li>
                                         {{ item|capitalize }}
                                     </li>
@@ -78,12 +70,12 @@
                             Vos allergies connues :
                         </p>
                         <ul class = "px-sm-5 mb-0">
-                            {% if (allergenes|length == 0) %}
+                            {% if (app.user.allergene|length == 0) %}
                                 <li>
                                     Aucune allergie connue.
                                 </li>
                             {% else %}
-                                {% for item in allergenes %}
+                                {% for item in app.user.allergene %}
                                     <li>
                                         {{ item|capitalize }}
                                     </li>

@@ -74,6 +74,7 @@
   background-image: url("/ASSETS/IMG/couverts.png");
   background-size: 60px;
   background-position: 40px 20px;
+  background-blend-mode: soft-light;
   }
 }
 
