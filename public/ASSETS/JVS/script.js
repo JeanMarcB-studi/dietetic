@@ -4,7 +4,7 @@ console.log("start engine")
 const idReceipe = parseInt(document.querySelector("#numReceipe").textContent)
 
 // const url="https://127.0.0.1:8000/note/"
-const url="/note/"
+// const url="/note/"
 
 const adrNote = document.querySelector("#note")
 const adrMess = document.querySelector("#message")
@@ -14,6 +14,7 @@ const adrPrep = document.querySelector("#preparation")
 const adrStars = document.querySelectorAll(".star")
 const myData = document.querySelector("#myData")
 let sendButton
+let url
 
 function handleClick() {
   sendNote();
@@ -22,7 +23,8 @@ function handleClick() {
 document.addEventListener('DOMContentLoaded', function() {
   //  notenote = JSON.parse(myData.dataset.receipe)
   valNote = myData.dataset.note
-  console.log("note: "+valNote)
+  console.log("note: " + valNote)
+  url = myData.dataset.url
 
   ingredients = JSON.parse(myData.dataset.ingredients)
   details = ingredients.split("\r\n")
@@ -31,7 +33,7 @@ document.addEventListener('DOMContentLoaded', function() {
     li.append(elt.trim())
     adrIngr.append(li)    
   }
-  
+
   preparation = JSON.parse(myData.dataset.preparation)
   details = preparation.split("\r\n")
   for (elt of details){
@@ -70,6 +72,7 @@ let sendNote = () => {
     message: adrMess.value
   })
   console.log("idReceipe: " + idReceipe)
+  console.log("url = " + url)
   
   var request = new Request(url, {
     method: 'POST',
@@ -86,7 +89,7 @@ let sendNote = () => {
     if (response.status != false){
       
       // It's OK
-      adrErr.textContent = "Note enregistrée : merci !"
+      adrErr.textContent = "Note bien enregistrée : merci !"
     } else {
 
       // We've got an error
@@ -96,7 +99,7 @@ let sendNote = () => {
     } 
 })
 
-//IF ERROR
+//IF OTHER SYSTEM ERROR
 .catch(error => console.log("Erreur : " + error));
 }
 

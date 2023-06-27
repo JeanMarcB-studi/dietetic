@@ -219,12 +219,11 @@
 
 
 <div id="myData" 
-    data-note="{{ noteval }}"
-    {# recette.ingredients|nl2br #}
+    data-note = "{{ noteval }}"
+    data-url = "{{ urlApi }}"
     data-ingredients = "{{ recette.ingredients|serialize(format = 'json') }}"
-    {# {{ recette.preparation|nl2br }} #}
     data-preparation = "{{ recette.preparation|serialize(format = 'json') }}"
-    >
+>
 </div>
 
 

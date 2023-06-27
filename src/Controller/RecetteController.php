@@ -135,6 +135,7 @@ class RecetteController extends AbstractController
         $recette = $RecetteRepository->find($idRecette);
         $comments = $NoteRepository->queryLstComment($idRecette);
         $note = array();
+        $urlApi = '';
 
         if ($this->getUser()){
 
@@ -148,20 +149,21 @@ class RecetteController extends AbstractController
             $recette->getRegime()->initialize();
             $recette->getAllergene()->initialize();
 
-            // GET CORRESPONDING CREDENTIALS TO LOCAL OR IN LINE
-            // if($_SERVER['SERVER_NAME'] === 'localhost')
-            // {
-            // require_once "db_test_id_local.php";  
-            // } else {  
-            // require_once "db_test_id_prod.php";
-            // }
+            //GET API URL FOR TO LOCAL OR IN LINE
+            if($_SERVER['SERVER_NAME'] === '127.0.0.1:8000')
+            {
+                $urlApi = 'https://127.0.0.1:8000/note/'; 
+            } else {  
+                $urlApi = 'https://diete.piramida.fr/note/';
+            }
             
         }
             return $this->render('pages/detail_recette.html.twig', [
                 'recette' => $recette,
                 'idRecette' => $idRecette,
                 'comments' => $comments,
-                'notes' => $note
+                'notes' => $note,
+                'urlApi' => $urlApi
             ]);
         }
 
