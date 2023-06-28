@@ -2,19 +2,12 @@
 
 namespace App\Controller;
 
-// use App\Entity\Note;
-// use App\Entity\Recette;
-// use App\Form\NoteType;
 use App\Repository\NoteRepository;
 use App\Repository\RecetteRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Request;
-// use Doctrine\ORM\EntityManagerInterface;
-// use EasyCorp\Bundle\EasyAdminBundle\Field\AssociationField;
-// use Symfony\Component\HttpFoundation\JsonResponse;
-
 
 
 class RecetteController extends AbstractController
@@ -31,42 +24,6 @@ class RecetteController extends AbstractController
             'lstNotes' => $NoteRepository->queryLstNotes(),
         ]);
     }
-
-    // private function lstRegime(): array
-    // {
-    //     $regimes = array();
-        
-    //     //RECUPERER LE USER CONNECTE
-    //     $user = $this->getUser();
-        
-    //     //IF USER IS CONNECTED
-    //     if ($user)
-    //     {
-    //         //$roles = $user->getRoles();
-            
-    //         //INITIALISER PUIS RECUPERER LES REGIMES
-    //         $user->getRegime()->initialize();
-    //         $regimes = $user->getRegime()->getValues();
-    //     }
-    //     return($regimes);
-    // }
-
-    // private function lstAllergene(): array
-    // {
-    //     $allergene = array();
-        
-    //     //RECUPERER LE USER CONNECTE
-    //     $user = $this->getUser();
-        
-    //     //IF USER IS CONNECTED
-    //     if ($user)
-    //     {
-    //         //INITIALISER POUR RECUPERER LES REGIMES
-    //         $user->getAllergene()->initialize();
-    //         $allergene = $user->getAllergene()->getValues();
-    //     }
-    //     return($allergene);
-    // }
 
     private function lstRecettes(RecetteRepository $repo, NoteRepository $NoteRepository): array
     {
