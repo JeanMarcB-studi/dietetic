@@ -1,10 +1,5 @@
 // ..... INITIALIZE ...........................................................
-console.log("start engine")
-
-const idReceipe = parseInt(document.querySelector("#numReceipe").textContent)
-
-// const url="https://127.0.0.1:8000/note/"
-// const url="/note/"
+console.log("start js")
 
 const adrNote = document.querySelector("#note")
 const adrMess = document.querySelector("#message")
@@ -64,6 +59,7 @@ let sendNote = () => {
   sendButton.classList.add("hidden")
   sendButton.removeEventListener('click', handleClick)
   console.log('click ENVOI')
+  let idReceipe = parseInt(document.querySelector("#numReceipe").textContent)
   
   let data = JSON.stringify({
     idReceipe: idReceipe,

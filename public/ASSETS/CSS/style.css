@@ -130,12 +130,10 @@ h2{
   /* text-shadow: 0 4px 4px 4px black; */
 }
 
-
 .block-100{
   display: block;
   height: 100px;
 }
-
 
 .max-300{
   max-width: 300px;

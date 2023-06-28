@@ -17,22 +17,22 @@
 <div class="p-2">
     <article class="container-sm mx-auto myWidth max-500 ">
         <div class="row border rounded-2 myApricotBG p-1 p-sm-4">
-            {# <div class="col-12 mt-3 border">
-                <h2>Vous enregistrer :</h2>
-            </div> #}
 
-            <div class="col-12 mt-3 p-1">
+            <div class="col-12 mt-1 p-1">
                 {{ form_start(registrationForm) }}
+                    {{ form_errors(registrationForm) }}
+
                     {{ form_row(registrationForm.email) }}
                     {{ form_row(registrationForm.plainPassword, {
                         label: 'Mot de passe'
                     }) }}
-                    <br>
+                 
                     {{ form_row(registrationForm.prenom) }}
                     {{ form_row(registrationForm.nom) }}
                     {{ form_row(registrationForm.telephone) }}
                     <br>
                     {{ form_row(registrationForm.commentaire_user) }}
+                    {{ form_rest(registrationForm) }}
 
                     {# {{ form_row(registrationForm.agreeTerms) }} #}
 

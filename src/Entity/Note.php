@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Entity;
+use Symfony\Component\Validator\Constraints as Assert;
 
 use App\Repository\NoteRepository;
 use Doctrine\DBAL\Types\Types;
@@ -15,6 +16,7 @@ class Note
     private ?int $id = null;
 
     #[ORM\Column(type: Types::DECIMAL, precision: 2, scale: '0')]
+    #[Assert\GreaterThan(value: 0), Assert\LessThan(value: 6)]    //to add some security
     private ?string $note = null;
 
     #[ORM\Column(type: Types::TEXT, nullable: true)]
