@@ -29,7 +29,7 @@ class RecetteController extends AbstractController
     {
         $recettes = array();
 
-        //RECUPERER LE USER CONNECTE
+        //INITIALIZE 
         $user = $this->getUser();
 
         //IF USER IS CONNECTED AND IS CLIENT
@@ -94,7 +94,8 @@ class RecetteController extends AbstractController
         $note = array();
         $urlApi = '';
 
-        if ($this->getUser()){
+        //TO BE ABLE TO SEND A COMMENT, THE USER MUST BE REGISTERED AS CUSTOMER AND CONNECTED
+        if ($this->getUser() and $this->getUser()->isEstClient()){
 
             // look if user already made a note on this receipe
             $user = $this->getUser()->getID();
@@ -106,22 +107,23 @@ class RecetteController extends AbstractController
             $recette->getRegime()->initialize();
             $recette->getAllergene()->initialize();
 
-            //GET API URL FOR TO LOCAL OR IN LINE
+            //GET API URL FOR LOCAL ENVIRONMENT OR ON LINE ENVIRONMENT
             if($_SERVER['SERVER_NAME'] === '127.0.0.1:8000')
             {
-                $urlApi = 'https://127.0.0.1:8000/note/'; 
+                $urlApi = 'https://127.0.0.1:8000/note/'; //LOCAL
             } else {  
-                $urlApi = 'https://diete.piramida.fr/note/';
+                $urlApi = 'https://diete.piramida.fr/note/'; //ON LINE
             }
             
         }
-            return $this->render('pages/detail_recette.html.twig', [
-                'recette' => $recette,
-                'idRecette' => $idRecette,
-                'comments' => $comments,
-                'notes' => $note,
-                'urlApi' => $urlApi
-            ]);
+
+        return $this->render('pages/detail_recette.html.twig', [
+            'recette' => $recette,
+            'idRecette' => $idRecette,
+            'comments' => $comments,
+            'notes' => $note,
+            'urlApi' => $urlApi
+        ]);
         }
 
 
