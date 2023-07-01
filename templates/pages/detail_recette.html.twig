@@ -129,69 +129,77 @@
     <div class="row max-500 mx-auto">
 
         {% if urlApi %}
+            {#..... WHAT TO SHOW IF CONNECTED CUSTOMER #}
 
-        {# ID RECEIPE #}
-        <div id="numReceipe" class="d-none">
-            {{ idRecette }}
-        </div>
+            {# ID RECEIPE #}
+            <div id="numReceipe" class="d-none">
+                {{ idRecette }}
+            </div>
 
-        {# SHOW IF MESSAGE ERROR #}
-        <div id="msgErr" class="col-12 text-center mt-0 mb-2 text-danger ">
-            {% if noteval == 0 %}
-                Si vous le souhaitez :
-            {% endif %}
-        </div>
-
-        {# NOTE SELECTION #}
-        <div class="col-12">
-            {% if noteval == 0 %}
-                <label for="note" class="form-label">Pour noter cette recette :</label>
-            {% else %}
-                <label for="note" class="form-label">Le {{ datemsg|date('d-m-Y') }}, vous avez noté cette recette :</label>                
-            {% endif %}
-        
-            <div class="input-group flex-nowrap">
-                <span class="input-group-text text-center align-middle text-danger" id="a1"><i class="bi bi-clipboard-heart align-middle mb-1"></i></span>
-                <div class="border w-100 text-center border-2 rounded-end myApricotBG pb-0">
-                    <div>
-                        <i class="bi bi-star star" data-value="1"></i>
-                        <i class="bi bi-star star" data-value="2"></i>
-                        <i class="bi bi-star star" data-value="3"></i>
-                        <i class="bi bi-star star" data-value="4"></i>
-                        <i class="bi bi-star star" data-value="5"></i>
-                    </div>
-                </div>
-            </div>            
-        </div>
-
-
-        {# MESSAGE INPUT #}
-        <div class="col-12 mt-3">
-            <div class="form-outline mb-1 p-1">
+            {# SHOW IF MESSAGE ERROR #}
+            <div id="msgErr" class="col-12 text-center mt-0 mb-2 text-danger ">
                 {% if noteval == 0 %}
-                    <label for="message" class="form-label">Un commentaire ?</label>
-                    <textarea class="form-control py-0 lh-1 mb-3 msg" id="message" name="message" rows="3"  placeholder="Avez vous un commentaire à faire sur cette recette ?">{{ message }}</textarea>
+                    Si vous le souhaitez :
+                {% endif %}
+            </div>
+
+            {# NOTE SELECTION #}
+            <div class="col-12">
+                {% if noteval == 0 %}
+                    <label for="note" class="form-label">Pour noter cette recette :</label>
                 {% else %}
-                    <label for="message" class="form-label">Vous avez commenté :</label>
-                    <textarea class="form-control py-0 lh-1 mb-3 msg" id="message" name="message" rows="3" readonly>{{ message }}</textarea>
+                    <label for="note" class="form-label">Le {{ datemsg|date('d-m-Y') }}, vous avez noté cette recette :</label>                
                 {% endif %}
             
+                <div class="input-group flex-nowrap">
+                    <span class="input-group-text text-center align-middle text-danger" id="a1"><i class="bi bi-clipboard-heart align-middle mb-1"></i></span>
+                    <div class="border w-100 text-center border-2 rounded-end myApricotBG pb-0">
+                        <div>
+                            <i class="bi bi-star star" data-value="1"></i>
+                            <i class="bi bi-star star" data-value="2"></i>
+                            <i class="bi bi-star star" data-value="3"></i>
+                            <i class="bi bi-star star" data-value="4"></i>
+                            <i class="bi bi-star star" data-value="5"></i>
+                        </div>
+                    </div>
+                </div>            
             </div>
-        </div>
 
-        {# BUTTON #}
-        {% if noteval == 0 %}
-            <div class="text-center">
-                <button class="col-4 btn btn-secondary" type="button" id="send">ENVOI</button>
+
+            {# MESSAGE INPUT #}
+            <div class="col-12 mt-3">
+                <div class="form-outline mb-1 p-1">
+                    {% if noteval == 0 %}
+                        <label for="message" class="form-label">Un commentaire ?</label>
+                        <textarea class="form-control py-0 lh-1 mb-3 msg" id="message" name="message" rows="3"  placeholder="Avez vous un commentaire à faire sur cette recette ?">{{ message }}</textarea>
+                    {% else %}
+                        <label for="message" class="form-label">Vous avez commenté :</label>
+                        <textarea class="form-control py-0 lh-1 mb-3 msg" id="message" name="message" rows="3" readonly>{{ message }}</textarea>
+                    {% endif %}
+                
+                </div>
             </div>
-        {% endif %}
+
+            {# BUTTON #}
+            {% if noteval == 0 %}
+                <div class="text-center">
+                    <button class="col-4 btn btn-secondary" type="button" id="send">ENVOI</button>
+                </div>
+            {% endif %}
         
         {% else %}
 
-            {# SHOW IF NOT CUSTOMER #}
+            {#..... WHAT TO SHOW IF NOT CUSTOMER #}
             <div id="msgErr" class="col-12 text-center mt-0 mb-2 text-danger ">
                 {% if noteval == 0 %}
-                    Pour noter cette recette ou laisser un commentaire, vous devez être connecté et enregistré comme client.
+                    <p>
+                        NB : Pour pouvoir noter cette recette, laisser un commentaire, ou accéder à plein d'autres recettes personnalisées pour vous, vous devez être connecté et enregistré comme client.
+                    </p>
+                    <div class="text-center pb-5 pb-lg-3 pt-0">
+                        <a class="btonContact m-auto" href="{{ path('app_register') }}">
+                            ME CONTACTER
+                        </a>
+                    </div>
                 {% endif %}
             </div>           
 
